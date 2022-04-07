@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="HTTP方法详解常见的 HTTP 方法HTTP 请求方法用于告诉服务器要做什么。HTTP 规范中定义了一组常用的请求方法。  例如：GET 方法负责从服务器获取文档，POST 方法会向服务器发送需要处理的数据，OPTIONS 方法用于确定服务器的一般功能，或者服务器处理特定资源的能力  下图描述了7种 HTTP 方法，并不是所有服务器都实现了所有7种方法。有些方法的请求报文中有主体，有些则无主体的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP方法详解">
+<meta property="og:url" content="https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="快乐的杨蛆">
+<meta property="og:description" content="HTTP方法详解常见的 HTTP 方法HTTP 请求方法用于告诉服务器要做什么。HTTP 规范中定义了一组常用的请求方法。  例如：GET 方法负责从服务器获取文档，POST 方法会向服务器发送需要处理的数据，OPTIONS 方法用于确定服务器的一般功能，或者服务器处理特定资源的能力  下图描述了7种 HTTP 方法，并不是所有服务器都实现了所有7种方法。有些方法的请求报文中有主体，有些则无主体的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-01.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-02.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-03.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-04.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-05.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-06.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-07.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-08.png">
+<meta property="article:published_time" content="2019-06-17T06:00:10.000Z">
+<meta property="article:modified_time" content="2022-04-07T09:38:49.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>HTTP方法详解</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/interview/docs/01.%E7%BD%91%E7%BB%9C/05.HTTP%E7%8A%B6%E6%80%81%E7%A0%81/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/interview/docs/01.%E7%BD%91%E7%BB%9C/07.HTTPS%E7%BB%86%E8%8A%82%E4%BB%8B%E7%BB%8D/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&text=HTTP方法详解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&is_video=false&description=HTTP方法详解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTTP方法详解&body=Check out this article: https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&name=HTTP方法详解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&t=HTTP方法详解"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">HTTP方法详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-HTTP-%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">常见的 HTTP 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">安全方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">方法详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">GET 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">HEAD 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.</span> <span class="toc-text">PUT 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TRACE-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.5.</span> <span class="toc-text">TRACE 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OPTIONS"><span class="toc-number">1.3.6.</span> <span class="toc-text">OPTIONS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">1.3.7.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.8.</span> <span class="toc-text">扩展方法</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        HTTP方法详解
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-17T06:00:10.000Z" itemprop="datePublished">2019-06-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="HTTP方法详解"><a href="#HTTP方法详解" class="headerlink" title="HTTP方法详解"></a>HTTP方法详解</h1><h2 id="常见的-HTTP-方法"><a href="#常见的-HTTP-方法" class="headerlink" title="常见的 HTTP 方法"></a>常见的 HTTP 方法</h2><p>HTTP 请求方法用于告诉服务器要做什么。HTTP 规范中定义了一组常用的请求方法。</p>
+<blockquote>
+<p>例如：GET 方法负责从服务器获取文档，POST 方法会向服务器发送需要处理的数据，OPTIONS 方法用于确定服务器的一般功能，或者服务器处理特定资源的能力</p>
+</blockquote>
+<p>下图描述了7种 HTTP 方法，并不是所有服务器都实现了所有7种方法。有些方法的请求报文中有主体，有些则无主体的请求</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method.png" alt="HTTP方法"></p>
+<p>由于 HTTP 设计易于扩展，除这些方法，其他服务器可能还会实现一些自己的请求方法。这些附加的方法是对 HTTP 规范的扩展，被称为<code>扩展方法</code></p>
+<h2 id="安全方法"><a href="#安全方法" class="headerlink" title="安全方法"></a>安全方法</h2><p>HTTP 定义了一组被称为<code>安全方法</code>的方法。GET 方法和 HEAD 方法都被认为是安全的，这就意味着使用 GET 或 HEAD 方法的 HTTP 请求都不会产生什么动作</p>
+<p>不产生动作，在这里意味着 HTTP 请求不会在服务器上产生什么结果。例如，你在 Colin 的五金商店购物时，点击了“提交购买”按钮。点击按钮时会提交一个带有信用卡信息的 POST 请求，那么在服务器上，就会为你执行一个动作。在这种情况下，为购买行为支付信用卡就是所执行的动作</p>
+<p>安全方法并不一定是什么动作都不执行的（实际上，这是由 Web 开发者决定的）。使用安全方法的目的就是当使用可能引发某一动作的不安全方法时，<code>允许 HTTP 应用程序开发者通知用户</code>。在 Colin 的五金商店的例子中，你的 Web 浏览器可能会弹出一条警告消息，说明你正在用不安全的方法发起请求，这样可能会在服务器上引发一些事件（比如用你的信用卡支付费用）</p>
+<h2 id="方法详解"><a href="#方法详解" class="headerlink" title="方法详解"></a>方法详解</h2><h3 id="GET-方法"><a href="#GET-方法" class="headerlink" title="GET 方法"></a>GET 方法</h3><p>GET 是最常用的方法。通常用于请求服务器发送某个资源。HTTP/1.1 要求服务器实现此方法</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-01.png" alt="HTTP方法-GET"></p>
+<h3 id="HEAD-方法"><a href="#HEAD-方法" class="headerlink" title="HEAD 方法"></a>HEAD 方法</h3><p>HEAD 方法与 GET 方法的行为很类似，但服务器在响应中只返回首部。不会返回实体的主体部分。这就允许客户端在未获取实际资源的情况下，对资源的首部进行检查。使用 HEAD，可以：</p>
+<ul>
+<li>在不获取资源的情况下了解资源的情况(比如，判断其类型)</li>
+<li>通过查看响应中的状态码，看看某个对象是否存在</li>
+<li>通过查看首部，测试资源是否被修改了</li>
+</ul>
+<p>服务器开发者必须确保返回的首部与 GET 请求所返回的首部完全相同。遵循 HTTP/1.1 规范，就必须实现 HEAD 方法</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-02.png" alt="HTTP方法-HEAD"></p>
+<h3 id="PUT-方法"><a href="#PUT-方法" class="headerlink" title="PUT 方法"></a>PUT 方法</h3><p>与 GET 从服务器读取文档相反，PUT 方法会向服务器写入文档。有些发布系统允许用户创建 Web 页面，并用 PUT 直接将其安装到 Web 服务器上去</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-03.png" alt="HTTP方法-PUT"></p>
+<p>PUT 方法的语义就是让服务器用请求的主体部分来创建一个由所请求的 URL 命名的新文档，或者，如果那个 URL 已经存在的话，就用这个主体来替代它。</p>
+<p>因为 PUT 允许用户对内容进行修改，所以很多 Web 服务器都要求在执行 PUT 之前，用密码登录</p>
+<h3 id="POST-方法"><a href="#POST-方法" class="headerlink" title="POST 方法"></a>POST 方法</h3><p>POST 方法起初是用来向服务器输入数据的。实际上，通常会用它来支持 HTML 的表单。表单中填好的数据通常会被送给服务器，然后由服务器将其发送到它要去的地方（比如，送到一个服务器网关程序中，然后由这个程序对其进行处理）</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-04.png" alt="HTTP方法-POST"></p>
+<h3 id="TRACE-方法"><a href="#TRACE-方法" class="headerlink" title="TRACE 方法"></a>TRACE 方法</h3><p>客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或其他一些应用程序。每个中间节点都可能会<code>修改原始的 HTTP 请求</code>。TRACE 方法允许客户端在最终将请求发送给服务器时，看看它变成了什么样子</p>
+<p>TRACE 请求会在目的服务器端发起一个“环回”诊断。行程最后一站的服务器会弹回一条 TRACE 响应，并在响应主体中携带它收到的原始请求报文。这样客户端就可以查看在所有中间 HTTP 应用程序组成的请求/响应链上，原始报文是否，以及如何被毁坏或修改过 TRACE 方法主要用于诊断；也就是说，用于验证请求是否如愿穿过了请求/响应链。它也是一种很好的工具，可以用来查看代理和其他应用程序对用户请求所产生效果</p>
+<p>尽管 TRACE 可以很方便地用于诊断，但它确实也有缺点，它假定中间应用程序对各种不同类型请求（不同的方法——GET、HEAD、POST 等）的处理是相同的。很多 HTTP 应用程序会根据方法的不同做出不同的事情——比如，代理可能会将 POST 请求直接发送给服务器，而将 GET 请求发送给另一个 HTTP 应用程序（比如Web 缓存）。TRACE 并不提供区分这些方法的机制。通常，中间应用程序会自行决定对 TRACE 请求的处理方式</p>
+<p>TRACE 请求中不能带有实体的主体部分。TRACE 响应的实体主体部分包含了响应服务器收到的请求的精确副本</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-05.png" alt="HTTP方法-TRACE"></p>
+<h3 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h3><p>OPTIONS 方法请求 Web 服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支持哪些方法。（有些服务器可能只支持对一些特殊类型的对象使用特定的操作）</p>
+<p>这为客户端应用程序提供了一种手段，使其不用实际访问那些资源就能判定访问各种资源的最优方式</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-06.png" alt="HTTP方法-OPTIONS"></p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>DELETE 方法所做的事情就是请服务器删除请求 URL 所指定的资源。但是，客户端应用程序无法保证删除操作一定会被执行。因为 HTTP 规范允许服务器在不通知客户端的情况下撤销请求</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-07.png" alt="HTTP方法-DELETE"></p>
+<h3 id="扩展方法"><a href="#扩展方法" class="headerlink" title="扩展方法"></a>扩展方法</h3><p>HTTP 被设计成字段可扩展的，这样新的特性就不会使老的软件失效了。扩展方法指的就是没有在 HTTP/1.1 规范中定义的方法。服务器会为它所管理的资源实现一些 HTTP 服务，这些方法为开发者提供了一种扩展这些 HTTP 服务能力的手段。下图列出了一些常见的扩展方法实例。这些方法就是 WebDAV HTTP 扩展包含的所有方法，这些方法有助于通过 HTTP 将 Web 内容发布到 Web 服务器上去</p>
+<p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//network-http-method-08.png" alt="HTTP方法-扩展方法"></p>
+<p>并不是所有的扩展方法都是在正式规范中定义的，认识到这一点很重要。如果你定义了一个扩展方法，很可能大部分 HTTP 应用程序都无法理解。同样，你的 HTTP应用程序也可能会遇到一些其他应用程序在用的，而它并不理解的扩展方法</p>
+<p>在这些情况下，最好对扩展方法宽容一些。如果能够在不破坏端到端行为的情况下将带有未知方法的报文传递给下游服务器，代理应尝试传递这些报文。如果可能破坏端到端行为则应以 501 Not Implemented（无法实现）状态码进行响应。最好按惯例“对所发送的内容要求严一点，对所接收的内容宽容一些”来处理扩展方法（以及一般的 HTTP 扩展）</p>
+<p><strong>《HTTP方法详解》 原文链接：<a target="_blank" rel="noopener" href="https://blog.maplemark.cn/2019/04/http%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3.html">https://blog.maplemark.cn/2019/04/http方法详解.html</a></strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">HTTP方法详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84-HTTP-%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">常见的 HTTP 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.2.</span> <span class="toc-text">安全方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.3.</span> <span class="toc-text">方法详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">GET 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HEAD-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">HEAD 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.3.</span> <span class="toc-text">PUT 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.4.</span> <span class="toc-text">POST 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TRACE-%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.5.</span> <span class="toc-text">TRACE 方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OPTIONS"><span class="toc-number">1.3.6.</span> <span class="toc-text">OPTIONS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">1.3.7.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A9%E5%B1%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.8.</span> <span class="toc-text">扩展方法</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&text=HTTP方法详解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&is_video=false&description=HTTP方法详解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTTP方法详解&body=Check out this article: https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&title=HTTP方法详解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&name=HTTP方法详解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/01.%E7%BD%91%E7%BB%9C/06.HTTP%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/&t=HTTP方法详解"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    快乐的杨蛆
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

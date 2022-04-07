@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="问题与简答PHP 篇echo、print、print_r、var_dump 区别 echo和print是语言结构、print_r和var_dump是普通函数   echo：输出一个或多个字符串  print：输出字符串  print_r：打印关于变量的易于理解的信息  var_dump：打印关于变量的易于理解的信息(带类型)   拓展阅读 《echo、print、print_r、var_dump区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP QA">
+<meta property="og:url" content="https://tlcydev.github.io/interview/docs/03.PHP/QA/index.html">
+<meta property="og:site_name" content="快乐的杨蛆">
+<meta property="og:description" content="问题与简答PHP 篇echo、print、print_r、var_dump 区别 echo和print是语言结构、print_r和var_dump是普通函数   echo：输出一个或多个字符串  print：输出字符串  print_r：打印关于变量的易于理解的信息  var_dump：打印关于变量的易于理解的信息(带类型)   拓展阅读 《echo、print、print_r、var_dump区">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//php-base64.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//php-ip2long.png">
+<meta property="article:published_time" content="2019-06-17T06:00:10.000Z">
+<meta property="article:modified_time" content="2022-04-07T09:42:38.304Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//php-base64.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PHP QA</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/interview/docs/04.Web/02.CSS%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/interview/docs/04.Web/01.%E5%88%9D%E6%8E%A2SEO/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/03.PHP/QA/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&text=PHP QA"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&is_video=false&description=PHP QA"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP QA&body=Check out this article: https://tlcydev.github.io/interview/docs/03.PHP/QA/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&name=PHP QA&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/03.PHP/QA/&t=PHP QA"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E7%AE%80%E7%AD%94"><span class="toc-number">1.</span> <span class="toc-text">问题与简答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP-%E7%AF%87"><span class="toc-number">1.1.</span> <span class="toc-text">PHP 篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#echo%E3%80%81print%E3%80%81print-r%E3%80%81var-dump-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.1.</span> <span class="toc-text">echo、print、print_r、var_dump 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.2.</span> <span class="toc-text">单引号和双引号的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isset-%E5%92%8C-empty-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.3.</span> <span class="toc-text">isset 和 empty 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static%E3%80%81self%E3%80%81-this-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.4.</span> <span class="toc-text">static、self、$this 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include%E3%80%81require%E3%80%81include-once%E3%80%81require-once-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">include、require、include_once、require_once 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.6.</span> <span class="toc-text">常见数组函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-%E5%92%8C-Session"><span class="toc-number">1.1.7.</span> <span class="toc-text">Cookie 和 Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.8.</span> <span class="toc-text">预定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC%E5%92%8C%E4%BC%A0%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.9.</span> <span class="toc-text">传值和传引用的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.10.</span> <span class="toc-text">构造函数和析构函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.11.</span> <span class="toc-text">魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public%E3%80%81protected%E3%80%81private%E3%80%81final-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.12.</span> <span class="toc-text">public、protected、private、final 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E7%AB%AF-IP-%E8%8E%B7%E5%8F%96%EF%BC%8C%E4%BA%86%E8%A7%A3%E4%BB%A3%E7%90%86%E9%80%8F%E4%BC%A0-%E5%AE%9E%E9%99%85IP-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.13.</span> <span class="toc-text">客户端&#x2F;服务端 IP 获取，了解代理透传 实际IP 的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.14.</span> <span class="toc-text">类的静态调用和实例化调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.15.</span> <span class="toc-text">接口和抽象的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E4%B8%8D%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.16.</span> <span class="toc-text">PHP 不实例化调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-ini-%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9"><span class="toc-number">1.1.17.</span> <span class="toc-text">php.ini 配置选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-fpm-conf-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.18.</span> <span class="toc-text">php-fpm.conf 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#502%E3%80%81504-%E9%94%99%E8%AF%AF%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.19.</span> <span class="toc-text">502、504 错误产生原因及解决方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#502"><span class="toc-number">1.1.19.1.</span> <span class="toc-text">502</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#504"><span class="toc-number">1.1.19.2.</span> <span class="toc-text">504</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#500"><span class="toc-number">1.1.19.3.</span> <span class="toc-text">500</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#503"><span class="toc-number">1.1.19.4.</span> <span class="toc-text">503</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA301%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.1.20.</span> <span class="toc-text">如何返回一个301重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E4%B8%8E-MySQL-%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.21.</span> <span class="toc-text">PHP 与 MySQL 连接方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL"><span class="toc-number">1.1.21.1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQLi"><span class="toc-number">1.1.21.2.</span> <span class="toc-text">MySQLi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDO"><span class="toc-number">1.1.21.3.</span> <span class="toc-text">PDO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E3%80%81MySQLi%E3%80%81PDO-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.22.</span> <span class="toc-text">MySQL、MySQLi、PDO 区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL-1"><span class="toc-number">1.1.22.1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQLi-1"><span class="toc-number">1.1.22.2.</span> <span class="toc-text">MySQLi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDO-1"><span class="toc-number">1.1.22.3.</span> <span class="toc-text">PDO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.23.</span> <span class="toc-text">数据库持久连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.24.</span> <span class="toc-text">代码执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64-%E7%BC%96%E7%A0%81%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.25.</span> <span class="toc-text">base64 编码原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ip2long-%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.26.</span> <span class="toc-text">ip2long 实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.27.</span> <span class="toc-text">MVC 的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%B5%81-PHP-%E6%A1%86%E6%9E%B6%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.28.</span> <span class="toc-text">主流 PHP 框架特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Laravel"><span class="toc-number">1.1.28.1.</span> <span class="toc-text">Laravel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Symfony"><span class="toc-number">1.1.28.2.</span> <span class="toc-text">Symfony</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CodeIgniter"><span class="toc-number">1.1.28.3.</span> <span class="toc-text">CodeIgniter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ThinkPHP"><span class="toc-number">1.1.28.4.</span> <span class="toc-text">ThinkPHP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84-ORM"><span class="toc-number">1.1.29.</span> <span class="toc-text">对象关系映射&#x2F;ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.1.29.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.29.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.30.</span> <span class="toc-text">链式调用实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.1.31.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.32.</span> <span class="toc-text">串行、并行、并发的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.33.</span> <span class="toc-text">同步与异步的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.34.</span> <span class="toc-text">阻塞与非阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.35.</span> <span class="toc-text">同步阻塞与非同步阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%BC%82%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.36.</span> <span class="toc-text">异步阻塞与异步非阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.37.</span> <span class="toc-text">如何实现异步调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%97%B6%E5%86%99%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.38.</span> <span class="toc-text">多进程同时写一个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E9%80%9A%E8%AE%AF%E6%96%B9%E5%BC%8F%EF%BC%8C%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.39.</span> <span class="toc-text">PHP 进程模型，进程通讯方式，进程线程区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%94%AF%E6%8C%81%E5%9B%9E%E8%B0%83%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA"><span class="toc-number">1.1.40.</span> <span class="toc-text">PHP 支持回调的函数，实现一个</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E8%B5%B7-HTTP-%E8%AF%B7%E6%B1%82%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.41.</span> <span class="toc-text">发起 HTTP 请求有哪几种方式，它们有何区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-for-while-foreach-%E8%BF%AD%E4%BB%A3%E6%95%B0%E7%BB%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%93%AA%E4%B8%AA%E6%95%88%E7%8E%87%E6%9C%80%E9%AB%98"><span class="toc-number">1.1.42.</span> <span class="toc-text">php for while foreach 迭代数组时候，哪个效率最高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.43.</span> <span class="toc-text">弱类型变量如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%8B%93%E5%B1%95%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.1.44.</span> <span class="toc-text">PHP 拓展初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.45.</span> <span class="toc-text">如何获取扩展安装路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.46.</span> <span class="toc-text">垃圾回收机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trait"><span class="toc-number">1.1.47.</span> <span class="toc-text">Trait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yield-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E8%AF%B4%E4%B8%AA%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-yield%E3%80%81yield-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.48.</span> <span class="toc-text">yield 是什么，说个使用场景 yield、yield 核心原理是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#traits-%E4%B8%8E-interfaces-%E5%8C%BA%E5%88%AB-%E5%8F%8A-traits-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E7%97%9B%E7%82%B9"><span class="toc-number">1.1.49.</span> <span class="toc-text">traits 与 interfaces 区别 及 traits 解决了什么痛点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95-foreach-%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E5%A6%82%E4%BD%95%E6%95%B0%E7%BB%84%E5%8C%96%E6%93%8D%E4%BD%9C%E5%AF%B9%E8%B1%A1-obj-key-%E3%80%81%E5%A6%82%E4%BD%95%E5%87%BD%E6%95%B0%E5%8C%96%E5%AF%B9%E8%B1%A1-obj-123"><span class="toc-number">1.1.50.</span> <span class="toc-text">如何 foreach 迭代对象、如何数组化操作对象 $obj[key]、如何函数化对象 $obj(123);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swoole-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%8D%8F%E7%A8%8B%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.51.</span> <span class="toc-text">Swoole 适用场景，协程实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#swoole%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.51.1.</span> <span class="toc-text">swoole的进程模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%95%B0%E7%BB%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0-%EF%BC%88HashTable-Linked-list%EF%BC%89"><span class="toc-number">1.1.52.</span> <span class="toc-text">PHP 数组底层实现 （HashTable + Linked list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy-on-write-%E5%8E%9F%E7%90%86%EF%BC%8C%E4%BD%95%E6%97%B6-GC"><span class="toc-number">1.1.53.</span> <span class="toc-text">Copy on write 原理，何时 GC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-PHP-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.54.</span> <span class="toc-text">如何解决 PHP 内存溢出问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZVAL"><span class="toc-number">1.1.55.</span> <span class="toc-text">ZVAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashTable"><span class="toc-number">1.1.56.</span> <span class="toc-text">HashTable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP7-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.57.</span> <span class="toc-text">PHP7 新特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP7-%E5%BA%95%E5%B1%82%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.58.</span> <span class="toc-text">PHP7 底层优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PSR-%E4%BB%8B%E7%BB%8D%EF%BC%8CPSR-1-2-4-7"><span class="toc-number">1.1.59.</span> <span class="toc-text">PSR 介绍，PSR-1, 2, 4, 7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xhprof-%E3%80%81Xdebug-%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.60.</span> <span class="toc-text">Xhprof 、Xdebug 性能调试工具使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%8C%E6%B3%A8%E6%84%8F-0-%E5%BC%80%E5%A4%B4%E7%9A%848%E8%BF%9B%E5%88%B6%E3%80%810x-%E5%BC%80%E5%A4%B416%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.61.</span> <span class="toc-text">字符串、数字比较大小的原理，注意 0 开头的8进制、0x 开头16进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E9%99%A4%E5%8E%BB"><span class="toc-number">1.1.62.</span> <span class="toc-text">BOM 头是什么，怎么除去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%88Smarty%E3%80%81Twig%E3%80%81Blade%EF%BC%89"><span class="toc-number">1.1.63.</span> <span class="toc-text">模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%EF%BC%8C%E5%B0%BD%E5%8F%AF%E8%83%BD%E9%AB%98%E6%95%88%E7%9A%84%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%A0%87%E5%87%86-URL-%E4%B8%AD%E5%8F%96%E5%87%BA%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%A9%E5%B1%95%E5%90%8D"><span class="toc-number">1.1.64.</span> <span class="toc-text">写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        PHP QA
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-17T06:00:10.000Z" itemprop="datePublished">2019-06-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="问题与简答"><a href="#问题与简答" class="headerlink" title="问题与简答"></a>问题与简答</h1><h2 id="PHP-篇"><a href="#PHP-篇" class="headerlink" title="PHP 篇"></a>PHP 篇</h2><h3 id="echo、print、print-r、var-dump-区别"><a href="#echo、print、print-r、var-dump-区别" class="headerlink" title="echo、print、print_r、var_dump 区别"></a>echo、print、print_r、var_dump 区别</h3><blockquote>
+<p><code>echo</code>和<code>print</code>是语言结构、<code>print_r</code>和<code>var_dump</code>是普通函数</p>
+</blockquote>
+<ul>
+<li><p>echo：输出一个或多个字符串</p>
+</li>
+<li><p>print：输出字符串</p>
+</li>
+<li><p>print_r：打印关于变量的易于理解的信息</p>
+</li>
+<li><p>var_dump：打印关于变量的易于理解的信息(带类型)</p>
+</li>
+</ul>
+<p>拓展阅读 <a href="./03.echo%E3%80%81print%E3%80%81print_r%E3%80%81var_dump%E5%8C%BA%E5%88%AB.md">《echo、print、print_r、var_dump区别》</a></p>
+<h3 id="单引号和双引号的区别"><a href="#单引号和双引号的区别" class="headerlink" title="单引号和双引号的区别"></a>单引号和双引号的区别</h3><p>双引号可以被分析器解析，单引号则不行</p>
+<h3 id="isset-和-empty-的区别"><a href="#isset-和-empty-的区别" class="headerlink" title="isset 和 empty 的区别"></a>isset 和 empty 的区别</h3><p>isset：检测变量是否已设置并且非 NULL</p>
+<p>empty：判断变量是否为空，变量为 0/false 也会被认为是空；变量不存在，不会产生警告</p>
+<h3 id="static、self、-this-的区别"><a href="#static、self、-this-的区别" class="headerlink" title="static、self、$this 的区别"></a>static、self、$this 的区别</h3><p>static：static 可以用于静态或非静态方法中，也可以访问类的静态属性、静态方法、常量和非静态方法，但不能访问非静态属性</p>
+<p>self：可以用于访问类的静态属性、静态方法和常量，但 self 指向的是当前定义所在的类，这是 self 的限制</p>
+<p>$this：指向的是实际调用时的对象，也就是说，实际运行过程中，谁调用了类的属性或方法，$this 指向的就是哪个对象。但 $this 不能访问类的静态属性和常量，且 $this 不能存在于静态方法中</p>
+<h3 id="include、require、include-once、require-once-的区别"><a href="#include、require、include-once、require-once-的区别" class="headerlink" title="include、require、include_once、require_once 的区别"></a>include、require、include_once、require_once 的区别</h3><p>require 和 include 几乎完全一样，除了处理失败的方式不同之外。require 在出错时产生 E_COMPILE_ERROR 级别的错误。换句话说将导致脚本中止而 include 只产生警告（E_WARNING），脚本会继续运行</p>
+<p>include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含。如同此语句名字暗示的那样，只会包含一次</p>
+<h3 id="常见数组函数"><a href="#常见数组函数" class="headerlink" title="常见数组函数"></a>常见数组函数</h3><p>array_count_values — 统计数组中所有的值</p>
+<p>array_flip — 交换数组中的键和值</p>
+<p>array_merge — 合并一个或多个数组</p>
+<p>array_multisort — 对多个数组或多维数组进行排序</p>
+<p>array_pad — 以指定长度将一个值填充进数组</p>
+<p>array_pop — 弹出数组最后一个单元(出栈)</p>
+<p>array_push — 将一个或多个单元压入数组的末尾(入栈)</p>
+<p>array_rand — 从数组中随机(伪随机)取出一个或多个单元</p>
+<p>array_keys — 返回数组中部分的或所有的键名</p>
+<p>array_values — 返回数组中所有的值</p>
+<p>count — 计算数组中的单元数目，或对象中的属性个数</p>
+<p>sort — 对数组排序</p>
+<h3 id="Cookie-和-Session"><a href="#Cookie-和-Session" class="headerlink" title="Cookie 和 Session"></a>Cookie 和 Session</h3><p>Cookie：PHP 透明的支持 HTTP cookie 。cookie 是一种远程浏览器端存储数据并以此来跟踪和识别用户的机制</p>
+<p>Session：会话机制(Session)在 PHP 中用于保持用户连续访问Web应用时的相关数据</p>
+<h3 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h3><p>对于全部脚本而言，PHP 提供了大量的预定义变量</p>
+<p>超全局变量 — 超全局变量是在全部作用域中始终可用的内置变量</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$GLOBALS — 引用全局作用域中可用的全部变量</span><br><span class="line">$_SERVER — 服务器和执行环境信息</span><br><span class="line">$_GET — HTTP GET 变量</span><br><span class="line">$_POST — HTTP POST 变量</span><br><span class="line">$_FILES — HTTP 文件上传变量</span><br><span class="line">$_REQUEST — HTTP Request 变量</span><br><span class="line">$_SESSION — Session 变量</span><br><span class="line">$_ENV — 环境变量</span><br><span class="line">$_COOKIE — HTTP Cookies</span><br><span class="line">$php_errormsg — 前一个错误信息</span><br><span class="line">$HTTP_RAW_POST_DATA — 原生POST数据</span><br><span class="line">$http_response_header — HTTP 响应头</span><br><span class="line">$argc — 传递给脚本的参数数目</span><br><span class="line">$argv — 传递给脚本的参数数组</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>超全局变量</li>
+</ul>
+<p>PHP 中的许多预定义变量都是“超全局的”，这意味着它们在一个脚本的全部作用域中都可用。在函数或方法中无需执行 global $variable; 就可以访问它们</p>
+<p>超全局变量：$GLOBALS、$_SERVER、$_GET、$_POST、$_FILES、$_COOKIE、$_SESSION、$_REQUEST、$_ENV</p>
+<h3 id="传值和传引用的区别"><a href="#传值和传引用的区别" class="headerlink" title="传值和传引用的区别"></a>传值和传引用的区别</h3><p>传值导致对象生成了一个拷贝，传引用则可以用两个变量指向同一个内容</p>
+<h3 id="构造函数和析构函数"><a href="#构造函数和析构函数" class="headerlink" title="构造函数和析构函数"></a>构造函数和析构函数</h3><p>构造函数：PHP 5 允行开发者在一个类中定义一个方法作为构造函数。具有构造函数的类会在每次创建新对象时先调用此方法，所以非常适合在使用对象之前做一些初始化工作</p>
+<p>析构函数：PHP 5 引入了析构函数的概念，这类似于其它面向对象的语言，如 C++。析构函数会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行</p>
+<h3 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h3><p>__construct()， __destruct()， __call()， __callStatic()， __get()， __set()， __isset()， __unset()， __sleep()， __wakeup()， __toString()， __invoke() 等方法在 PHP 中被称为”魔术方法”（Magic methods）</p>
+<h3 id="public、protected、private、final-区别"><a href="#public、protected、private、final-区别" class="headerlink" title="public、protected、private、final 区别"></a>public、protected、private、final 区别</h3><p>对属性或方法的访问控制，是通过在前面添加关键字 public（公有），protected（受保护）或 private（私有）来实现的。被定义为公有的类成员可以在任何地方被访问</p>
+<p>PHP 5 新增了一个 final 关键字。如果父类中的方法被声明为 final，则子类无法覆盖该方法。如果一个类被声明为 final，则不能被继承</p>
+<h3 id="客户端-服务端-IP-获取，了解代理透传-实际IP-的概念"><a href="#客户端-服务端-IP-获取，了解代理透传-实际IP-的概念" class="headerlink" title="客户端/服务端 IP 获取，了解代理透传 实际IP 的概念"></a>客户端/服务端 IP 获取，了解代理透传 实际IP 的概念</h3><p>客户端IP: $_SERVER[‘REMOTE_ADDR’]</p>
+<p>服务端IP: $_SERVER[‘SERVER_ADDR’]</p>
+<p>客户端IP(代理透传): $_SERVER[‘HTTP_X_FORWARDED_FOR’]</p>
+<h3 id="类的静态调用和实例化调用"><a href="#类的静态调用和实例化调用" class="headerlink" title="类的静态调用和实例化调用"></a>类的静态调用和实例化调用</h3><ul>
+<li>占用内存</li>
+</ul>
+<p>静态方法在内存中只有一份，无论调用多少次，都是共用的</p>
+<p>实例化不一样，每一个实例化是一个对象，在内存中是多个的</p>
+<ul>
+<li>不同点</li>
+</ul>
+<p>静态调用不需要实例化即可调用</p>
+<p>静态方法不能调用非静态属性，因为非静态属性需要实例化后，存放在对象里</p>
+<p>静态方法可以调用非静态方法，使用 self 关键字。php 里，一个方法被 <code>self::</code> 后，自动转变为静态方法</p>
+<p>调用类的静态函数时不会自动调用类的构造函数</p>
+<h3 id="接口和抽象的区别"><a href="#接口和抽象的区别" class="headerlink" title="接口和抽象的区别"></a>接口和抽象的区别</h3><p>抽象用于描述不同的事物，接口用于描述事物的行为。</p>
+<h3 id="PHP-不实例化调用方法"><a href="#PHP-不实例化调用方法" class="headerlink" title="PHP 不实例化调用方法"></a>PHP 不实例化调用方法</h3><p>静态调用、使用 PHP 反射方式</p>
+<h3 id="php-ini-配置选项"><a href="#php-ini-配置选项" class="headerlink" title="php.ini 配置选项"></a>php.ini 配置选项</h3><ul>
+<li>配置选项</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>short_open_tag</td>
+<td>“1”</td>
+<td>是否开启缩写形式(<code>&lt;? ?&gt;</code>)</td>
+</tr>
+<tr>
+<td>precision</td>
+<td>“14”</td>
+<td>浮点数中显示有效数字的位数</td>
+</tr>
+<tr>
+<td>disable_functions</td>
+<td>“”</td>
+<td>禁止某些函数</td>
+</tr>
+<tr>
+<td>disable_classes</td>
+<td>“”</td>
+<td>禁用某些类</td>
+</tr>
+<tr>
+<td>expose_php</td>
+<td>“”</td>
+<td>是否暴露 PHP 被安装在服务器上</td>
+</tr>
+<tr>
+<td>max_execution_time</td>
+<td>30</td>
+<td>最大执行时间</td>
+</tr>
+<tr>
+<td>memory_limit</td>
+<td>128M</td>
+<td>每个脚本执行的内存限制</td>
+</tr>
+<tr>
+<td>error_reporting</td>
+<td>NULL</td>
+<td>设置错误报告的级别 <code>E_ALL</code> &amp; ~`E_NOTICE<code> &amp; ~</code>E_STRICT<code> &amp; ~</code>E_DEPRECATED`</td>
+</tr>
+<tr>
+<td>display_errors</td>
+<td>“1”</td>
+<td>显示错误</td>
+</tr>
+<tr>
+<td>log_errors</td>
+<td>“0”</td>
+<td>设置是否将错误日志记录到 error_log 中</td>
+</tr>
+<tr>
+<td>error_log</td>
+<td>NULL</td>
+<td>设置脚本错误将被记录到的文件</td>
+</tr>
+<tr>
+<td>upload_max_filesize</td>
+<td>“2M”</td>
+<td>最大上传文件大小</td>
+</tr>
+<tr>
+<td>post_max_size</td>
+<td>“8M”</td>
+<td>设置POST最大数据限制</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -ini | grep short_open_tag //查看 php.ini 配置</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>动态设置</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="keyword">string</span> <span class="variable">$varname</span> , <span class="keyword">string</span> <span class="variable">$newvalue</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;date.timezone&#x27;</span>, <span class="string">&#x27;Asia/Shanghai&#x27;</span>); <span class="comment">//设置时区</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;display_errors&#x27;</span>, <span class="string">&#x27;1&#x27;</span>); <span class="comment">//设置显示错误</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;memory_limit&#x27;</span>, <span class="string">&#x27;256M&#x27;</span>); <span class="comment">//设置最大内存限制</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="php-fpm-conf-配置"><a href="#php-fpm-conf-配置" class="headerlink" title="php-fpm.conf 配置"></a>php-fpm.conf 配置</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>默认</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pid</td>
+<td></td>
+<td>PID文件的位置</td>
+</tr>
+<tr>
+<td>error_log</td>
+<td></td>
+<td>错误日志的位置</td>
+</tr>
+<tr>
+<td>log_level</td>
+<td>notice</td>
+<td>错误级别 alert:必须立即处理、error:错误情况、warning:警告情况、notice:一般重要信息、debug:调试信息</td>
+</tr>
+<tr>
+<td>daemonize</td>
+<td>yes</td>
+<td>设置 FPM 在后台运行</td>
+</tr>
+<tr>
+<td>listen</td>
+<td>ip:port、port、/path/to/unix/socket</td>
+<td>设置接受 FastCGI 请求的地址</td>
+</tr>
+<tr>
+<td>pm</td>
+<td>static、ondemand、dynamic</td>
+<td>设置进程管理器如何管理子进程</td>
+</tr>
+<tr>
+<td>request_slowlog_timeout</td>
+<td>‘0’</td>
+<td>慢日志记录阀值</td>
+</tr>
+<tr>
+<td>slowlog</td>
+<td></td>
+<td>慢请求的记录日志</td>
+</tr>
+</tbody></table>
+<h3 id="502、504-错误产生原因及解决方式"><a href="#502、504-错误产生原因及解决方式" class="headerlink" title="502、504 错误产生原因及解决方式"></a>502、504 错误产生原因及解决方式</h3><h4 id="502"><a href="#502" class="headerlink" title="502"></a>502</h4><p>502 表示网关错误，当 PHP-CGI 得到一个无效响应，网关就会输出这个错误</p>
+<ul>
+<li><code>php.ini</code> 的 memory_limit 过小</li>
+<li><code>php-fpm.conf</code> 中 max_children、max_requests 设置不合理</li>
+<li><code>php-fpm.conf</code> 中 request_terminate_timeout、max_execution_time 设置不合理</li>
+<li>php-fpm 进程处理不过来，进程数不足、脚本存在性能问题</li>
+</ul>
+<h4 id="504"><a href="#504" class="headerlink" title="504"></a>504</h4><p>504 表示网关超时，PHP-CGI 没有在指定时间响应请求，网关将输出这个错误</p>
+<ul>
+<li>Nginx+PHP 架构，可以调整 FastCGI 超时时间，fastcgi_connect_timeout、fastcgi_send_timeout、fastcgi_read_timeout</li>
+</ul>
+<h4 id="500"><a href="#500" class="headerlink" title="500"></a>500</h4><p>php 代码问题，文件权限问题，资源问题</p>
+<h4 id="503"><a href="#503" class="headerlink" title="503"></a>503</h4><p>超载或者停机维护</p>
+<h3 id="如何返回一个301重定向"><a href="#如何返回一个301重定向" class="headerlink" title="如何返回一个301重定向"></a>如何返回一个301重定向</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;HTTP/1.1 301 Moved Permanently&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">header</span>(<span class="string">&#x27;Location: https://blog.maplemark.cn&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="PHP-与-MySQL-连接方式"><a href="#PHP-与-MySQL-连接方式" class="headerlink" title="PHP 与 MySQL 连接方式"></a>PHP 与 MySQL 连接方式</h3><h4 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span> = <span class="title function_ invoke__">mysql_connect</span>(<span class="string">&#x27;127.0.0.1:3306&#x27;</span>, <span class="string">&#x27;root&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$conn</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="title function_ invoke__">mysql_error</span>() . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysql_query</span>(<span class="string">&quot;SET NAMES &#x27;utf8&#x27;&quot;</span>);</span><br><span class="line"><span class="variable">$select_db</span> = <span class="title function_ invoke__">mysql_select_db</span>(<span class="string">&#x27;app&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$select_db</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="title function_ invoke__">mysql_error</span>() . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM `user` LIMIT 1&quot;</span>;</span><br><span class="line"><span class="variable">$res</span> = <span class="title function_ invoke__">mysql_query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$res</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="title function_ invoke__">mysql_error</span>() . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$row</span> = <span class="title function_ invoke__">mysql_fetch_assoc</span>(<span class="variable">$res</span>)) &#123;</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$row</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">mysql_close</span>(<span class="variable">$conn</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="MySQLi"><a href="#MySQLi" class="headerlink" title="MySQLi"></a>MySQLi</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$conn</span> = @<span class="keyword">new</span> <span class="title function_ invoke__">mysqli</span>(<span class="string">&#x27;127.0.0.1:3306&#x27;</span>, <span class="string">&#x27;root&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$conn</span>-&gt;connect_errno) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="variable">$conn</span>-&gt;connect_error . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="string">&quot;set names &#x27;utf8&#x27;;&quot;</span>);</span><br><span class="line"><span class="variable">$select_db</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">select_db</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$select_db</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="variable">$conn</span>-&gt;error . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM `user` LIMIT 1&quot;</span>;</span><br><span class="line"><span class="variable">$res</span> = <span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$res</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="variable">$conn</span>-&gt;error . <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$row</span> = <span class="variable">$res</span>-&gt;<span class="title function_ invoke__">fetch_assoc</span>()) &#123;</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$row</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$res</span>-&gt;<span class="title function_ invoke__">free</span>();</span><br><span class="line"><span class="variable">$conn</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+<h4 id="PDO"><a href="#PDO" class="headerlink" title="PDO"></a>PDO</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdo</span> = <span class="keyword">new</span> <span class="title function_ invoke__">PDO</span>(<span class="string">&#x27;mysql:host=127.0.0.1:3306;dbname=user&#x27;</span>, <span class="string">&#x27;root&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line"><span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="string">&quot;set names &#x27;utf8&#x27;&quot;</span>);</span><br><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;SELECT * FROM `user` LIMIT 1&quot;</span>;</span><br><span class="line"><span class="variable">$stmt</span> = <span class="variable">$pdo</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">bindValue</span>(<span class="number">1</span>, <span class="number">1</span>, PDO::<span class="variable constant_">PARAM_STR</span>);</span><br><span class="line"><span class="variable">$rs</span> = <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$rs</span>) &#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$row</span> = <span class="variable">$stmt</span>-&gt;<span class="title function_ invoke__">fetch</span>(PDO::<span class="variable constant_">FETCH_ASSOC</span>)) &#123;</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$row</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$pdo</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MySQL、MySQLi、PDO-区别"><a href="#MySQL、MySQLi、PDO-区别" class="headerlink" title="MySQL、MySQLi、PDO 区别"></a>MySQL、MySQLi、PDO 区别</h3><h4 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h4><ul>
+<li>允许 PHP 应用与 MySQL 数据库交互的早期扩展</li>
+<li>提供了一个面向过程的接口，不支持后期的一些特性</li>
+</ul>
+<h4 id="MySQLi-1"><a href="#MySQLi-1" class="headerlink" title="MySQLi"></a>MySQLi</h4><ul>
+<li>面向对象接口</li>
+<li>prepared 语句支持</li>
+<li>多语句执行支持</li>
+<li>事务支持</li>
+<li>增强的调试能力</li>
+</ul>
+<h4 id="PDO-1"><a href="#PDO-1" class="headerlink" title="PDO"></a>PDO</h4><ul>
+<li>PHP 应用中的一个数据库抽象层规范</li>
+<li>PDO 提供一个统一的 API 接口，无须关心数据库类型</li>
+<li>使用标准的 PDO API，可以快速无缝切换数据库</li>
+</ul>
+<h3 id="数据库持久连接"><a href="#数据库持久连接" class="headerlink" title="数据库持久连接"></a>数据库持久连接</h3><p>把 PHP 用作多进程 web 服务器的一个模块，这种方法目前只适用于 Apache。</p>
+<p>对于一个多进程的服务器，其典型特征是有一个父进程和一组子进程协调运行，其中实际生成 web 页面的是子进程。每当客户端向父进程提出请求时，该请求会被传递给还没有被其它的客户端请求占用的子进程。这也就是说当相同的客户端第二次向服务端提出请求时，它将有可能被一个不同的子进程来处理。在开启了一个持久连接后，所有请求 SQL 服务的后继页面都能够重用这个已经建立的 SQL Server 连接。</p>
+<h3 id="代码执行过程"><a href="#代码执行过程" class="headerlink" title="代码执行过程"></a>代码执行过程</h3><p>PHP 代码 =&gt; 启动 php 及 zend 引擎，加载注册拓展模块 =&gt; 对代码进行词法/语法分析 =&gt; 编译成opcode(opcache) =&gt; 执行 opcode</p>
+<blockquote>
+<p>PHP7 新增了抽象语法树(AST)，在语法分析阶段生成 AST，然后再生成 opcode 数组</p>
+</blockquote>
+<h3 id="base64-编码原理"><a href="#base64-编码原理" class="headerlink" title="base64 编码原理"></a>base64 编码原理</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//php-base64.png" alt="base64"></p>
+<h3 id="ip2long-实现"><a href="#ip2long-实现" class="headerlink" title="ip2long 实现"></a>ip2long 实现</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//php-ip2long.png" alt="ip2long"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">124.205.30.150=2093817494</span><br><span class="line"></span><br><span class="line">list($p1,$p2,$p3,$p4) = explode(&#x27;.&#x27;,&#x27;124.205.30.150&#x27;);</span><br><span class="line"></span><br><span class="line">$realNum = $p1&lt;&lt;24+$p2&lt;&lt;16+$p3&lt;&lt;8+$p4;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MVC-的理解"><a href="#MVC-的理解" class="headerlink" title="MVC 的理解"></a>MVC 的理解</h3><p>MVC 包括三类对象。模型 Model 是应用对象，视图 View 是它在屏幕上的表示，控制器 Controller 定义用户界面对用户输入的响应方式。不使用 MVC，用户界面设计往往将这些对象混在一起，而 MVC 则将它们分离以提高灵活性和复用性</p>
+<h3 id="主流-PHP-框架特点"><a href="#主流-PHP-框架特点" class="headerlink" title="主流 PHP 框架特点"></a>主流 PHP 框架特点</h3><h4 id="Laravel"><a href="#Laravel" class="headerlink" title="Laravel"></a>Laravel</h4><p>易于访问，功能强大，并提供大型，强大的应用程序所需的工具</p>
+<ul>
+<li>简单快速的路由引擎</li>
+<li>强大的依赖注入容器</li>
+<li>富有表现力，直观的数据库 ORM</li>
+<li>提供数据库迁移功能</li>
+<li>灵活的任务调度器</li>
+<li>实时事件广播</li>
+</ul>
+<h4 id="Symfony"><a href="#Symfony" class="headerlink" title="Symfony"></a>Symfony</h4><ul>
+<li>Database engine-independent</li>
+<li>Simple to use, in most cases, but still flexible enough to adapt to complex cases</li>
+<li>Based on the premise of convention over configuration–the developer needs to configure only the unconventional</li>
+<li>Compliant with most web best practices and design patterns</li>
+<li>Enterprise-ready–adaptable to existing information technology (IT) policies and architectures, and stable enough for long-term projects</li>
+<li>Very readable code, with phpDocumentor comments, for easy maintenance</li>
+<li>Easy to extend, allowing for integration with other vendor libraries</li>
+</ul>
+<h4 id="CodeIgniter"><a href="#CodeIgniter" class="headerlink" title="CodeIgniter"></a>CodeIgniter</h4><ul>
+<li>基于模型-视图-控制器的系统</li>
+<li>框架比较轻量</li>
+<li>全功能数据库类，支持多个平台</li>
+<li>Query Builder 数据库支持</li>
+<li>表单和数据验证</li>
+<li>安全性和 XSS 过滤</li>
+<li>全页面缓存</li>
+</ul>
+<h4 id="ThinkPHP"><a href="#ThinkPHP" class="headerlink" title="ThinkPHP"></a>ThinkPHP</h4><ul>
+<li>采用容器统一管理对象</li>
+<li>支持 Facade</li>
+<li>更易用的路由</li>
+<li>注解路由支持</li>
+<li>路由跨域请求支持</li>
+<li>验证类增强</li>
+<li>配置和路由目录独立</li>
+<li>取消系统常量</li>
+<li>类库别名机制</li>
+<li>模型和数据库增强</li>
+<li>依赖注入完善</li>
+<li>支持 PSR-3 日志规范</li>
+<li>中间件支持</li>
+<li>支持 Swoole/Workerman 运行</li>
+</ul>
+<h3 id="对象关系映射-ORM"><a href="#对象关系映射-ORM" class="headerlink" title="对象关系映射/ORM"></a>对象关系映射/ORM</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
+<li>缩短编码时间、减少甚至免除对 model 的编码，降低数据库学习成本</li>
+<li>动态的数据表映射，在表结构发生改变时，减少代码修改</li>
+<li>可以很方便的引入附加功能(cache 层)</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>映射消耗性能、ORM 对象消耗内存</li>
+<li>SQL 语句较为复杂时，ORM 语法可读性不高(使用原生 SQL)</li>
+</ul>
+<h3 id="链式调用实现"><a href="#链式调用实现" class="headerlink" title="链式调用实现"></a>链式调用实现</h3><p>类定义一个内置变量，让类中其他定义方法可访问到</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>set_exception_handler — 设置用户自定义的异常处理函数</p>
+<p>使用 try / catch 捕获</p>
+<h3 id="串行、并行、并发的区别"><a href="#串行、并行、并发的区别" class="headerlink" title="串行、并行、并发的区别"></a>串行、并行、并发的区别</h3><p>串行：执行多个任务时，各个任务按顺序执行，完成一个之后才能进行下一个<br>并行：多个任务在同一时刻执行<br>并发：同一时刻需要执行多个任务</p>
+<h3 id="同步与异步的理解"><a href="#同步与异步的理解" class="headerlink" title="同步与异步的理解"></a>同步与异步的理解</h3><p><strong>同步和异步是一种消息通信机制</strong>。其关注点在于 <code>被调用者返回</code> 和 <code>结果返回</code> 之间的关系，描述对象是被调用对象的行为。</p>
+<h3 id="阻塞与非阻塞的理解"><a href="#阻塞与非阻塞的理解" class="headerlink" title="阻塞与非阻塞的理解"></a>阻塞与非阻塞的理解</h3><p><strong>阻塞和非阻塞是一种业务流程处理方式</strong>。其关注点在于调用发生时 <code>调用者状态</code> 和 <code>被调用者返回结果</code> 之间的关系，描述对象是等待结果时候调用者的状态。</p>
+<h3 id="同步阻塞与非同步阻塞的理解"><a href="#同步阻塞与非同步阻塞的理解" class="headerlink" title="同步阻塞与非同步阻塞的理解"></a>同步阻塞与非同步阻塞的理解</h3><p>同步阻塞：打电话问老板有没有某书（调用），老板说查一下，让你别挂电话（同步），你一直等待老板给你结果，什么事也不做（阻塞）。</p>
+<p>同步非阻塞：打电话问老板有没有某书（调用），老板说查一下，让你别挂电话（同步），等电话的过程中你还一边嗑瓜子（非阻塞）。</p>
+<h3 id="异步阻塞与异步非阻塞的理解"><a href="#异步阻塞与异步非阻塞的理解" class="headerlink" title="异步阻塞与异步非阻塞的理解"></a>异步阻塞与异步非阻塞的理解</h3><p>异步阻塞：打电话问老板有没有某书（调用），老板说你先挂电话，有了结果通知你（异步），你挂了电话后（结束调用）, 除了等老板电话通知结果，什么事情也不做（阻塞）。</p>
+<p>异步非阻塞：打电话问老板有没有某书（调用），老板说你先挂电话，有了结果通知你（异步），你挂电话后（结束调用），一遍等电话，一遍嗑瓜子。（非阻塞）</p>
+<h3 id="如何实现异步调用"><a href="#如何实现异步调用" class="headerlink" title="如何实现异步调用"></a>如何实现异步调用</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$fp</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="string">&quot;blog.maplemark.cn&quot;</span>, <span class="number">80</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$fp</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$errstr</span> (<span class="subst">$errno</span>)&lt;br /&gt;\n&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable">$out</span> = <span class="string">&quot;GET /backend.php  / HTTP/1.1\r\n&quot;</span>;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Host: blog.maplemark.cn\r\n&quot;</span>;</span><br><span class="line">    <span class="variable">$out</span> .= <span class="string">&quot;Connection: Close\r\n\r\n&quot;</span>;</span><br><span class="line">    <span class="title function_ invoke__">fwrite</span>(<span class="variable">$fp</span>, <span class="variable">$out</span>);</span><br><span class="line">    <span class="comment">/*忽略执行结果</span></span><br><span class="line"><span class="comment">    while (!feof($fp)) &#123;</span></span><br><span class="line"><span class="comment">        echo fgets($fp, 128);</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多进程同时写一个文件"><a href="#多进程同时写一个文件" class="headerlink" title="多进程同时写一个文件"></a>多进程同时写一个文件</h3><p>加锁、队列</p>
+<h3 id="PHP-进程模型，进程通讯方式，进程线程区别"><a href="#PHP-进程模型，进程通讯方式，进程线程区别" class="headerlink" title="PHP 进程模型，进程通讯方式，进程线程区别"></a>PHP 进程模型，进程通讯方式，进程线程区别</h3><p>消息队列、socket、信号量、共享内存、信号、管道</p>
+<h3 id="PHP-支持回调的函数，实现一个"><a href="#PHP-支持回调的函数，实现一个" class="headerlink" title="PHP 支持回调的函数，实现一个"></a>PHP 支持回调的函数，实现一个</h3><p>array_map、array_filter、array_walk、usort</p>
+<p>is_callable + callbacks + 匿名函数实现</p>
+<h3 id="发起-HTTP-请求有哪几种方式，它们有何区别"><a href="#发起-HTTP-请求有哪几种方式，它们有何区别" class="headerlink" title="发起 HTTP 请求有哪几种方式，它们有何区别"></a>发起 HTTP 请求有哪几种方式，它们有何区别</h3><p>cURL、file_get_contents、fopen、fsockopen</p>
+<h3 id="php-for-while-foreach-迭代数组时候，哪个效率最高"><a href="#php-for-while-foreach-迭代数组时候，哪个效率最高" class="headerlink" title="php for while foreach 迭代数组时候，哪个效率最高"></a>php for while foreach 迭代数组时候，哪个效率最高</h3><h3 id="弱类型变量如何实现"><a href="#弱类型变量如何实现" class="headerlink" title="弱类型变量如何实现"></a>弱类型变量如何实现</h3><p>PHP 中声明的变量，在 zend 引擎中都是用结构体 zval 来保存，通过共同体实现弱类型变量声明</p>
+<h3 id="PHP-拓展初始化"><a href="#PHP-拓展初始化" class="headerlink" title="PHP 拓展初始化"></a>PHP 拓展初始化</h3><ul>
+<li>初始化拓展</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">php /php-src/ext/ext_skel.php --ext</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义拓展函数</li>
+</ul>
+<p>zend_module_entry 定义 Extension name 编写 PHP_FUNCTION 函数</p>
+<ul>
+<li>编译安装</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">phpize $ ./configure $ make &amp;&amp; make install</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如何获取扩展安装路径"><a href="#如何获取扩展安装路径" class="headerlink" title="如何获取扩展安装路径"></a>如何获取扩展安装路径</h3><h3 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h3><p>引用计数器</p>
+<h3 id="Trait"><a href="#Trait" class="headerlink" title="Trait"></a>Trait</h3><p>自 PHP 5.4.0 起，PHP 实现了一种代码复用的方法，称为 trait</p>
+<h3 id="yield-是什么，说个使用场景-yield、yield-核心原理是什么"><a href="#yield-是什么，说个使用场景-yield、yield-核心原理是什么" class="headerlink" title="yield 是什么，说个使用场景 yield、yield 核心原理是什么"></a>yield 是什么，说个使用场景 yield、yield 核心原理是什么</h3><p>一个生成器函数看起来像一个普通的函数，不同的是普通函数返回一个值，而一个生成器可以yield生成许多它所需要的值。</p>
+<p>yield核心原理: PHP在使用生成器的时候，会返回一个Generator类的对象。每一次迭代，PHP会通过Generator实例计算出下一次需要迭代的值。简述即yield用于生成值。</p>
+<p>yield使用场景：读取大文件、大量计算。</p>
+<p>yield好处：节省内存、优化性能</p>
+<h3 id="traits-与-interfaces-区别-及-traits-解决了什么痛点"><a href="#traits-与-interfaces-区别-及-traits-解决了什么痛点" class="headerlink" title="traits 与 interfaces 区别 及 traits 解决了什么痛点"></a>traits 与 interfaces 区别 及 traits 解决了什么痛点</h3><h3 id="如何-foreach-迭代对象、如何数组化操作对象-obj-key-、如何函数化对象-obj-123"><a href="#如何-foreach-迭代对象、如何数组化操作对象-obj-key-、如何函数化对象-obj-123" class="headerlink" title="如何 foreach 迭代对象、如何数组化操作对象 $obj[key]、如何函数化对象 $obj(123);"></a>如何 foreach 迭代对象、如何数组化操作对象 $obj[key]、如何函数化对象 $obj(123);</h3><h3 id="Swoole-适用场景，协程实现方式"><a href="#Swoole-适用场景，协程实现方式" class="headerlink" title="Swoole 适用场景，协程实现方式"></a>Swoole 适用场景，协程实现方式</h3><p>Swoole 是一个使用 C++ 语言编写的基于异步事件驱动和协程的并行网络通信引擎，为 PHP 提供协程、高性能网络编程支持。提供了多种通信协议的网络服务器和客户端模块，可以方便快速的实现 TCP/UDP服务、高性能Web、WebSocket服务、物联网、实时通讯、游戏、微服务等，使 PHP 不再局限于传统的 Web 领域。</p>
+<p>协程可以简单理解为线程，只不过这个线程是用户态的，不需要操作系统参与，创建销毁和切换的成本非常低，和线程不同的是协程没法利用多核 cpu 的，想利用多核 cpu 需要依赖 Swoole 的多进程模型。<br>在底层实现上是单线程的，因此同一时间只有一个协程在工作，协程的执行是串行的。<br>采用 CSP 编程模型，即不要以共享内存的方式来通信，相反，要通过通信来共享内存。<br>swoole4.0采用双栈方式，通过栈桢切换来实现协程；即遇到IO等待就切换到。</p>
+<h4 id="swoole的进程模型"><a href="#swoole的进程模型" class="headerlink" title="swoole的进程模型"></a>swoole的进程模型</h4><p>同一台主机上两个进程间通信 (简称 IPC) 的方式有很多种，在 Swoole 中使用了 2 种方式 Unix Socket 和 sysvmsg。</p>
+<p>swoole启动后会生成master进程、reactor线程、worker进程、task进程以及manager进程</p>
+<p>master进程是一个多线程进程，会生成多个reactor线程<br>reactor线程负载网络监听、数据收发<br>work进程处理reactor线程投递的请求数据<br>task进程处理work进程投递的任务<br>manager进程用于管理work进程和task进程</p>
+<h3 id="PHP-数组底层实现-（HashTable-Linked-list）"><a href="#PHP-数组底层实现-（HashTable-Linked-list）" class="headerlink" title="PHP 数组底层实现 （HashTable + Linked list）"></a>PHP 数组底层实现 （HashTable + Linked list）</h3><p>PHP 数组底层依赖的散列表数据结构，定义如下（位于 Zend/zend_types.h）。</p>
+<p>数据存储在一个散列表中，通过中间层来保存索引与实际存储在散列表中位置的映射。</p>
+<p>由于哈希函数会存在哈希冲突的可能，因此对冲突的值采用链表来保存。</p>
+<p>哈希表的查询效率是o（1），链表查询效率是o（n）；因此PHP数据索引速度很快；但是相对比较占用空间。</p>
+<h3 id="Copy-on-write-原理，何时-GC"><a href="#Copy-on-write-原理，何时-GC" class="headerlink" title="Copy on write 原理，何时 GC"></a>Copy on write 原理，何时 GC</h3><h3 id="如何解决-PHP-内存溢出问题"><a href="#如何解决-PHP-内存溢出问题" class="headerlink" title="如何解决 PHP 内存溢出问题"></a>如何解决 PHP 内存溢出问题</h3><h3 id="ZVAL"><a href="#ZVAL" class="headerlink" title="ZVAL"></a>ZVAL</h3><h3 id="HashTable"><a href="#HashTable" class="headerlink" title="HashTable"></a>HashTable</h3><h3 id="PHP7-新特性"><a href="#PHP7-新特性" class="headerlink" title="PHP7 新特性"></a>PHP7 新特性</h3><p>标量类型声明、返回值类型声明、通过 define() 定义常量数组、匿名类、相同命名空间类一次性导入</p>
+<h3 id="PHP7-底层优化"><a href="#PHP7-底层优化" class="headerlink" title="PHP7 底层优化"></a>PHP7 底层优化</h3><p>ZVAL 结构体优化，占用由24字节降低为16字节</p>
+<p>内部类型 zend_string，结构体成员变量采用 char 数组，不是用 char*</p>
+<p>PHP 数组实现由 hashtable 变为 zend array</p>
+<p>函数调用机制，改进函数调用机制，通过优化参数传递环节，减少了一些指令</p>
+<h3 id="PSR-介绍，PSR-1-2-4-7"><a href="#PSR-介绍，PSR-1-2-4-7" class="headerlink" title="PSR 介绍，PSR-1, 2, 4, 7"></a>PSR 介绍，PSR-1, 2, 4, 7</h3><h3 id="Xhprof-、Xdebug-性能调试工具使用"><a href="#Xhprof-、Xdebug-性能调试工具使用" class="headerlink" title="Xhprof 、Xdebug 性能调试工具使用"></a>Xhprof 、Xdebug 性能调试工具使用</h3><h3 id="字符串、数字比较大小的原理，注意-0-开头的8进制、0x-开头16进制"><a href="#字符串、数字比较大小的原理，注意-0-开头的8进制、0x-开头16进制" class="headerlink" title="字符串、数字比较大小的原理，注意 0 开头的8进制、0x 开头16进制"></a>字符串、数字比较大小的原理，注意 0 开头的8进制、0x 开头16进制</h3><h3 id="BOM-头是什么，怎么除去"><a href="#BOM-头是什么，怎么除去" class="headerlink" title="BOM 头是什么，怎么除去"></a>BOM 头是什么，怎么除去</h3><p>WINDOWS自带的记事本，在保存一个以 UTF-8 编码的文件时，会在文件开始的地方插入三个不可见的字符（0xEF 0xBB 0xBF，即BOM）；它是一串隐藏的字符，用于让记事本等编辑器识别这个文件是否以UTF-8编码。<br>去除方法：$result = trim($result, “\xEF\xBB\xBF”);</p>
+<h3 id="模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）"><a href="#模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）" class="headerlink" title="模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）"></a>模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）</h3><h3 id="写一个函数，尽可能高效的从一个标准-URL-中取出文件的扩展名"><a href="#写一个函数，尽可能高效的从一个标准-URL-中取出文件的扩展名" class="headerlink" title="写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名"></a>写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名</h3><p>parse_str,explode</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E7%AE%80%E7%AD%94"><span class="toc-number">1.</span> <span class="toc-text">问题与简答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP-%E7%AF%87"><span class="toc-number">1.1.</span> <span class="toc-text">PHP 篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#echo%E3%80%81print%E3%80%81print-r%E3%80%81var-dump-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.1.</span> <span class="toc-text">echo、print、print_r、var_dump 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.2.</span> <span class="toc-text">单引号和双引号的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isset-%E5%92%8C-empty-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.3.</span> <span class="toc-text">isset 和 empty 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static%E3%80%81self%E3%80%81-this-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.4.</span> <span class="toc-text">static、self、$this 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#include%E3%80%81require%E3%80%81include-once%E3%80%81require-once-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">include、require、include_once、require_once 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.6.</span> <span class="toc-text">常见数组函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-%E5%92%8C-Session"><span class="toc-number">1.1.7.</span> <span class="toc-text">Cookie 和 Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">1.1.8.</span> <span class="toc-text">预定义变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E5%80%BC%E5%92%8C%E4%BC%A0%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.9.</span> <span class="toc-text">传值和传引用的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.10.</span> <span class="toc-text">构造函数和析构函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.11.</span> <span class="toc-text">魔术方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#public%E3%80%81protected%E3%80%81private%E3%80%81final-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.12.</span> <span class="toc-text">public、protected、private、final 区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%9C%8D%E5%8A%A1%E7%AB%AF-IP-%E8%8E%B7%E5%8F%96%EF%BC%8C%E4%BA%86%E8%A7%A3%E4%BB%A3%E7%90%86%E9%80%8F%E4%BC%A0-%E5%AE%9E%E9%99%85IP-%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.13.</span> <span class="toc-text">客户端&#x2F;服务端 IP 获取，了解代理透传 实际IP 的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E8%B0%83%E7%94%A8%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.14.</span> <span class="toc-text">类的静态调用和实例化调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.15.</span> <span class="toc-text">接口和抽象的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E4%B8%8D%E5%AE%9E%E4%BE%8B%E5%8C%96%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">1.1.16.</span> <span class="toc-text">PHP 不实例化调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-ini-%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9"><span class="toc-number">1.1.17.</span> <span class="toc-text">php.ini 配置选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-fpm-conf-%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.18.</span> <span class="toc-text">php-fpm.conf 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#502%E3%80%81504-%E9%94%99%E8%AF%AF%E4%BA%A7%E7%94%9F%E5%8E%9F%E5%9B%A0%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.19.</span> <span class="toc-text">502、504 错误产生原因及解决方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#502"><span class="toc-number">1.1.19.1.</span> <span class="toc-text">502</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#504"><span class="toc-number">1.1.19.2.</span> <span class="toc-text">504</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#500"><span class="toc-number">1.1.19.3.</span> <span class="toc-text">500</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#503"><span class="toc-number">1.1.19.4.</span> <span class="toc-text">503</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA301%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.1.20.</span> <span class="toc-text">如何返回一个301重定向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E4%B8%8E-MySQL-%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.21.</span> <span class="toc-text">PHP 与 MySQL 连接方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL"><span class="toc-number">1.1.21.1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQLi"><span class="toc-number">1.1.21.2.</span> <span class="toc-text">MySQLi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDO"><span class="toc-number">1.1.21.3.</span> <span class="toc-text">PDO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E3%80%81MySQLi%E3%80%81PDO-%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.22.</span> <span class="toc-text">MySQL、MySQLi、PDO 区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL-1"><span class="toc-number">1.1.22.1.</span> <span class="toc-text">MySQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQLi-1"><span class="toc-number">1.1.22.2.</span> <span class="toc-text">MySQLi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDO-1"><span class="toc-number">1.1.22.3.</span> <span class="toc-text">PDO</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.23.</span> <span class="toc-text">数据库持久连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.1.24.</span> <span class="toc-text">代码执行过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#base64-%E7%BC%96%E7%A0%81%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.25.</span> <span class="toc-text">base64 编码原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ip2long-%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.26.</span> <span class="toc-text">ip2long 实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC-%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.27.</span> <span class="toc-text">MVC 的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%B5%81-PHP-%E6%A1%86%E6%9E%B6%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.28.</span> <span class="toc-text">主流 PHP 框架特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Laravel"><span class="toc-number">1.1.28.1.</span> <span class="toc-text">Laravel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Symfony"><span class="toc-number">1.1.28.2.</span> <span class="toc-text">Symfony</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CodeIgniter"><span class="toc-number">1.1.28.3.</span> <span class="toc-text">CodeIgniter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ThinkPHP"><span class="toc-number">1.1.28.4.</span> <span class="toc-text">ThinkPHP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84-ORM"><span class="toc-number">1.1.29.</span> <span class="toc-text">对象关系映射&#x2F;ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-number">1.1.29.1.</span> <span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.29.2.</span> <span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.30.</span> <span class="toc-text">链式调用实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">1.1.31.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.32.</span> <span class="toc-text">串行、并行、并发的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%B8%8E%E5%BC%82%E6%AD%A5%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.33.</span> <span class="toc-text">同步与异步的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.34.</span> <span class="toc-text">阻塞与非阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E4%B8%8E%E9%9D%9E%E5%90%8C%E6%AD%A5%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.35.</span> <span class="toc-text">同步阻塞与非同步阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E9%98%BB%E5%A1%9E%E4%B8%8E%E5%BC%82%E6%AD%A5%E9%9D%9E%E9%98%BB%E5%A1%9E%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.36.</span> <span class="toc-text">异步阻塞与异步非阻塞的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.37.</span> <span class="toc-text">如何实现异步调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%97%B6%E5%86%99%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.38.</span> <span class="toc-text">多进程同时写一个文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B%EF%BC%8C%E8%BF%9B%E7%A8%8B%E9%80%9A%E8%AE%AF%E6%96%B9%E5%BC%8F%EF%BC%8C%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.39.</span> <span class="toc-text">PHP 进程模型，进程通讯方式，进程线程区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%94%AF%E6%8C%81%E5%9B%9E%E8%B0%83%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA"><span class="toc-number">1.1.40.</span> <span class="toc-text">PHP 支持回调的函数，实现一个</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E8%B5%B7-HTTP-%E8%AF%B7%E6%B1%82%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E5%AE%83%E4%BB%AC%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.41.</span> <span class="toc-text">发起 HTTP 请求有哪几种方式，它们有何区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-for-while-foreach-%E8%BF%AD%E4%BB%A3%E6%95%B0%E7%BB%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%93%AA%E4%B8%AA%E6%95%88%E7%8E%87%E6%9C%80%E9%AB%98"><span class="toc-number">1.1.42.</span> <span class="toc-text">php for while foreach 迭代数组时候，哪个效率最高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B1%E7%B1%BB%E5%9E%8B%E5%8F%98%E9%87%8F%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.43.</span> <span class="toc-text">弱类型变量如何实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%8B%93%E5%B1%95%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.1.44.</span> <span class="toc-text">PHP 拓展初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%89%A9%E5%B1%95%E5%AE%89%E8%A3%85%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.45.</span> <span class="toc-text">如何获取扩展安装路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.46.</span> <span class="toc-text">垃圾回收机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trait"><span class="toc-number">1.1.47.</span> <span class="toc-text">Trait</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yield-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E8%AF%B4%E4%B8%AA%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-yield%E3%80%81yield-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.48.</span> <span class="toc-text">yield 是什么，说个使用场景 yield、yield 核心原理是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#traits-%E4%B8%8E-interfaces-%E5%8C%BA%E5%88%AB-%E5%8F%8A-traits-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E7%97%9B%E7%82%B9"><span class="toc-number">1.1.49.</span> <span class="toc-text">traits 与 interfaces 区别 及 traits 解决了什么痛点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95-foreach-%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E5%A6%82%E4%BD%95%E6%95%B0%E7%BB%84%E5%8C%96%E6%93%8D%E4%BD%9C%E5%AF%B9%E8%B1%A1-obj-key-%E3%80%81%E5%A6%82%E4%BD%95%E5%87%BD%E6%95%B0%E5%8C%96%E5%AF%B9%E8%B1%A1-obj-123"><span class="toc-number">1.1.50.</span> <span class="toc-text">如何 foreach 迭代对象、如何数组化操作对象 $obj[key]、如何函数化对象 $obj(123);</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swoole-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%8D%8F%E7%A8%8B%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.51.</span> <span class="toc-text">Swoole 适用场景，协程实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#swoole%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.51.1.</span> <span class="toc-text">swoole的进程模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP-%E6%95%B0%E7%BB%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0-%EF%BC%88HashTable-Linked-list%EF%BC%89"><span class="toc-number">1.1.52.</span> <span class="toc-text">PHP 数组底层实现 （HashTable + Linked list）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy-on-write-%E5%8E%9F%E7%90%86%EF%BC%8C%E4%BD%95%E6%97%B6-GC"><span class="toc-number">1.1.53.</span> <span class="toc-text">Copy on write 原理，何时 GC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3-PHP-%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.54.</span> <span class="toc-text">如何解决 PHP 内存溢出问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZVAL"><span class="toc-number">1.1.55.</span> <span class="toc-text">ZVAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashTable"><span class="toc-number">1.1.56.</span> <span class="toc-text">HashTable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP7-%E6%96%B0%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.57.</span> <span class="toc-text">PHP7 新特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP7-%E5%BA%95%E5%B1%82%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.58.</span> <span class="toc-text">PHP7 底层优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PSR-%E4%BB%8B%E7%BB%8D%EF%BC%8CPSR-1-2-4-7"><span class="toc-number">1.1.59.</span> <span class="toc-text">PSR 介绍，PSR-1, 2, 4, 7</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Xhprof-%E3%80%81Xdebug-%E6%80%A7%E8%83%BD%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.60.</span> <span class="toc-text">Xhprof 、Xdebug 性能调试工具使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E6%95%B0%E5%AD%97%E6%AF%94%E8%BE%83%E5%A4%A7%E5%B0%8F%E7%9A%84%E5%8E%9F%E7%90%86%EF%BC%8C%E6%B3%A8%E6%84%8F-0-%E5%BC%80%E5%A4%B4%E7%9A%848%E8%BF%9B%E5%88%B6%E3%80%810x-%E5%BC%80%E5%A4%B416%E8%BF%9B%E5%88%B6"><span class="toc-number">1.1.61.</span> <span class="toc-text">字符串、数字比较大小的原理，注意 0 开头的8进制、0x 开头16进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BOM-%E5%A4%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%80%8E%E4%B9%88%E9%99%A4%E5%8E%BB"><span class="toc-number">1.1.62.</span> <span class="toc-text">BOM 头是什么，怎么除去</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E8%A7%A3%E5%86%B3%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%EF%BC%88Smarty%E3%80%81Twig%E3%80%81Blade%EF%BC%89"><span class="toc-number">1.1.63.</span> <span class="toc-text">模板引擎是什么，解决什么问题、实现原理（Smarty、Twig、Blade）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%99%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%EF%BC%8C%E5%B0%BD%E5%8F%AF%E8%83%BD%E9%AB%98%E6%95%88%E7%9A%84%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%A0%87%E5%87%86-URL-%E4%B8%AD%E5%8F%96%E5%87%BA%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%A9%E5%B1%95%E5%90%8D"><span class="toc-number">1.1.64.</span> <span class="toc-text">写一个函数，尽可能高效的从一个标准 URL 中取出文件的扩展名</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/03.PHP/QA/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&text=PHP QA"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&is_video=false&description=PHP QA"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP QA&body=Check out this article: https://tlcydev.github.io/interview/docs/03.PHP/QA/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&title=PHP QA"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/03.PHP/QA/&name=PHP QA&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/03.PHP/QA/&t=PHP QA"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    快乐的杨蛆
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

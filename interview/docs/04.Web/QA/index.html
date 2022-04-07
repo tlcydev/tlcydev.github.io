@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="问题与简答Web 篇SEO 有哪些需要注意的合理的 title、description、keywords 语义化的 HTML 代码，符合 W3C 规范：语义化代码让搜索引擎容易理解网页 重要内容 HTML 代码放在最前：搜索引擎抓取 HTML 顺序是从上到下，有的搜索引擎对抓取长度有限制，保证重要内容一定会被抓取 重要内容不要用 js 输出：爬虫不会执行 js 获取内容 少用 iframe：搜索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEB QA">
+<meta property="og:url" content="https://tlcydev.github.io/interview/docs/04.Web/QA/index.html">
+<meta property="og:site_name" content="快乐的杨蛆">
+<meta property="og:description" content="问题与简答Web 篇SEO 有哪些需要注意的合理的 title、description、keywords 语义化的 HTML 代码，符合 W3C 规范：语义化代码让搜索引擎容易理解网页 重要内容 HTML 代码放在最前：搜索引擎抓取 HTML 顺序是从上到下，有的搜索引擎对抓取长度有限制，保证重要内容一定会被抓取 重要内容不要用 js 输出：爬虫不会执行 js 获取内容 少用 iframe：搜索引">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-css-CSS%E9%80%89%E6%8B%A9%E5%99%A8.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-css-CSS%E6%A1%86%E6%A8%A1%E5%9E%8B.jpg">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-javascript-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png">
+<meta property="article:published_time" content="2019-06-17T06:00:10.000Z">
+<meta property="article:modified_time" content="2022-04-07T09:47:55.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-css-CSS%E9%80%89%E6%8B%A9%E5%99%A8.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>WEB QA</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/09.%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E9%A2%98/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/interview/docs/04.Web/15.jsonp%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/04.Web/QA/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&text=WEB QA"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&is_video=false&description=WEB QA"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WEB QA&body=Check out this article: https://tlcydev.github.io/interview/docs/04.Web/QA/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&name=WEB QA&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/04.Web/QA/&t=WEB QA"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E7%AE%80%E7%AD%94"><span class="toc-number">1.</span> <span class="toc-text">问题与简答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-%E7%AF%87"><span class="toc-number">1.1.</span> <span class="toc-text">Web 篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">SEO 有哪些需要注意的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#img-%E6%A0%87%E7%AD%BE%E7%9A%84-title-%E5%92%8C-alt-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.2.</span> <span class="toc-text">img 标签的 title 和 alt 有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.</span> <span class="toc-text">CSS 选择器的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-sprite-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">CSS sprite 是什么，有什么优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none-%E4%B8%8E-visibility-hidden-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">display: none 与 visibility: hidden 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display-block-%E5%92%8C-display-inline-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.6.</span> <span class="toc-text">display: block 和 display: inline 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E6%96%87%E4%BB%B6%E3%80%81style-%E6%A0%87%E7%AD%BE%E3%80%81%E8%A1%8C%E5%86%85-style-%E5%B1%9E%E6%80%A7%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.1.7.</span> <span class="toc-text">CSS 文件、style 标签、行内 style 属性优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link-%E4%B8%8E-import-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.8.</span> <span class="toc-text">link 与 @import 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.9.</span> <span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%85%E5%90%AB%E8%8B%A5%E5%B9%B2%E6%B5%AE%E5%8A%A8%E5%85%83%E7%B4%A0%E6%97%B6%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86-%E5%8C%85%E5%90%AB-%E6%B5%AE%E5%8A%A8"><span class="toc-number">1.1.10.</span> <span class="toc-text">容器包含若干浮动元素时如何清理(包含)浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.11.</span> <span class="toc-text">如何水平居中一个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%AB%96%E7%9B%B4%E5%B1%85%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.12.</span> <span class="toc-text">如何竖直居中一个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-%E4%B8%8E-CSS-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.13.</span> <span class="toc-text">flex 与 CSS 盒子模型有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Position-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.14.</span> <span class="toc-text">Position 属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PNG-GIF-JPG-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%A6%82%E4%BD%95%E9%80%89"><span class="toc-number">1.1.15.</span> <span class="toc-text">PNG,GIF,JPG 的区别及如何选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A-JavaScript-%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8-Html-%E5%BA%95%E9%83%A8"><span class="toc-number">1.1.16.</span> <span class="toc-text">为什么把 JavaScript 文件放在 Html 底部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.17.</span> <span class="toc-text">JavaScript 数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E6%93%8D%E4%BD%9C-DOM-%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.18.</span> <span class="toc-text">JavaScript 操作 DOM 的方法有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.19.</span> <span class="toc-text">JavaScript 字符串方法有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.20.</span> <span class="toc-text">JavaScript 字符串截取方法有哪些？有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout-%E5%92%8C-setInterval-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.21.</span> <span class="toc-text">setTimeout 和 setInterval 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E4%BE%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.22.</span> <span class="toc-text">使用 new 操作符实例化一个对象的具体步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-ajax-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.23.</span> <span class="toc-text">如何实现 ajax 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.24.</span> <span class="toc-text">同源策略是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.25.</span> <span class="toc-text">如何解决跨域问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.26.</span> <span class="toc-text">引起内存泄漏的操作有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%90%86%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.27.</span> <span class="toc-text">闭包理解及应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-JavaScript-%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.28.</span> <span class="toc-text">对 JavaScript 原型的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-JavaScript-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.29.</span> <span class="toc-text">对 JavaScript 模块化的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E7%BD%91%E9%A1%B5%E4%B8%AD%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%88%90%E5%8A%9F%E6%88%96%E8%80%85%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.1.30.</span> <span class="toc-text">如何判断网页中图片加载成功或者失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.1.31.</span> <span class="toc-text">如何实现懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.32.</span> <span class="toc-text">JSONP 原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-%E8%AF%BB%E5%86%99"><span class="toc-number">1.1.33.</span> <span class="toc-text">Cookie 读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA"><span class="toc-number">1.1.34.</span> <span class="toc-text">渐进增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5-URL-%E5%88%B0%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.35.</span> <span class="toc-text">从浏览器地址栏输入 URL 到显示页面的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-js-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.36.</span> <span class="toc-text">Vue.js 双向绑定原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.37.</span> <span class="toc-text">如何进行网站性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.38.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">1.1.39.</span> <span class="toc-text">新技术（了解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D-ES6"><span class="toc-number">1.1.40.</span> <span class="toc-text">简要介绍 ES6</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        WEB QA
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-17T06:00:10.000Z" itemprop="datePublished">2019-06-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="问题与简答"><a href="#问题与简答" class="headerlink" title="问题与简答"></a>问题与简答</h1><h2 id="Web-篇"><a href="#Web-篇" class="headerlink" title="Web 篇"></a>Web 篇</h2><h3 id="SEO-有哪些需要注意的"><a href="#SEO-有哪些需要注意的" class="headerlink" title="SEO 有哪些需要注意的"></a>SEO 有哪些需要注意的</h3><p>合理的 title、description、keywords</p>
+<p>语义化的 HTML 代码，符合 W3C 规范：语义化代码让搜索引擎容易理解网页</p>
+<p>重要内容 HTML 代码放在最前：搜索引擎抓取 HTML 顺序是从上到下，有的搜索引擎对抓取长度有限制，保证重要内容一定会被抓取</p>
+<p>重要内容不要用 js 输出：爬虫不会执行 js 获取内容</p>
+<p>少用 iframe：搜索引擎不会抓取 iframe 中的内容</p>
+<p>非装饰性图片必须加 alt</p>
+<p>提高网站速度：网站速度是搜索引擎排序的一个重要指标</p>
+<p>拓展阅读<a href="./01.%E5%88%9D%E6%8E%A2SEO.md">《初探 SEO》</a></p>
+<h3 id="img-标签的-title-和-alt-有什么区别"><a href="#img-标签的-title-和-alt-有什么区别" class="headerlink" title="img 标签的 title 和 alt 有什么区别"></a>img 标签的 title 和 alt 有什么区别</h3><p>title 属性规定关于元素的额外信息，这些信息通常会在鼠标移到元素上时显示一段提示文本</p>
+<p>alt 是<code>&lt;img&gt;</code>标签的特有属性，是图片内容的等价描述。图片无法加载时显示。搜索引擎会重点分析</p>
+<h3 id="CSS-选择器的分类"><a href="#CSS-选择器的分类" class="headerlink" title="CSS 选择器的分类"></a>CSS 选择器的分类</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-css-CSS%E9%80%89%E6%8B%A9%E5%99%A8.png" alt="CSS选择器"></p>
+<p>拓展阅读<a href="./02.CSS%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB.md">《CSS选择器的分类》</a></p>
+<h3 id="CSS-sprite-是什么，有什么优缺点"><a href="#CSS-sprite-是什么，有什么优缺点" class="headerlink" title="CSS sprite 是什么，有什么优缺点"></a>CSS sprite 是什么，有什么优缺点</h3><p>概念：将多个小图片拼接到一个图片中。通过 background-position 和元素尺寸调节需要显示的背景图案。</p>
+<ul>
+<li>优点</li>
+</ul>
+<p>减少 HTTP 请求数，极大地提高页面加载速度</p>
+<p>增加图片信息重复度，提高压缩比，减少图片大小</p>
+<p>更换风格方便，只需在一张或几张图片上修改颜色或样式即可实现</p>
+<ul>
+<li>缺点</li>
+</ul>
+<p>图片合并麻烦</p>
+<p>维护麻烦，修改一个图片可能需要从新布局整个图片，样式</p>
+<p>拓展阅读<a href="./03.CSS-Sprite%E7%9A%84%E5%BA%94%E7%94%A8.md">《雪碧图CSS Sprite的应用》</a></p>
+<h3 id="display-none-与-visibility-hidden-的区别"><a href="#display-none-与-visibility-hidden-的区别" class="headerlink" title="display: none 与 visibility: hidden 的区别"></a>display: none 与 visibility: hidden 的区别</h3><ul>
+<li>用途</li>
+</ul>
+<p>通过为属性设置一个值来影响用户代理显示的方式</p>
+<ul>
+<li>区别</li>
+</ul>
+<p>display:none 会让元素完全从渲染树中消失，渲染的时候不占据任何空间；visibility: hidden 不会让元素从渲染树消失，渲染师元素继续占据空间，只是内容不可见</p>
+<p>display: none 是非继承属性，子孙节点消失由于元素从渲染树消失造成，通过修改子孙节点属性无法显示；visibility: hidden 是继承属性，子孙节点消失由于继承了hidden，通过设置visibility: visible 可以让子孙节点显式</p>
+<p>修改常规流中元素的 display 通常会造成文档重排。修改 visibility 属性只会造成本元素的重绘</p>
+<p>读屏器不会读取 display: none 元素内容；会读取 visibility: hidden 元素内容</p>
+<h3 id="display-block-和-display-inline-的区别"><a href="#display-block-和-display-inline-的区别" class="headerlink" title="display: block 和 display: inline 的区别"></a>display: block 和 display: inline 的区别</h3><ul>
+<li>block 元素特点</li>
+</ul>
+<p>处于常规流中时，如果 width 没有设置，会自动填充满父容器</p>
+<p>可以应用 margin/padding</p>
+<p>在没有设置高度的情况下会扩展高度以包含常规流中的子元素 </p>
+<p>处于常规流中时布局时在前后元素位置之间（独占一个水平空间）</p>
+<p>忽略 vertical-align</p>
+<ul>
+<li>inline 元素特点</li>
+</ul>
+<p>水平方向上根据 direction 依次布局</p>
+<p>不会在元素前后进行换行</p>
+<p>受 white-space 控制</p>
+<p>margin/padding 在竖直方向上无效，水平方向上有效</p>
+<p>width/height 属性对非替换行内元素无效，宽度由元素内容决定</p>
+<p>非替换行内元素的行框高由 line-height 确定，替换行内元素的行框高由 height,margin,padding,border 决定</p>
+<p>浮动或绝对定位时会转换为 block</p>
+<p>vertical-align 属性生效</p>
+<h3 id="CSS-文件、style-标签、行内-style-属性优先级"><a href="#CSS-文件、style-标签、行内-style-属性优先级" class="headerlink" title="CSS 文件、style 标签、行内 style 属性优先级"></a>CSS 文件、style 标签、行内 style 属性优先级</h3><p>最近的祖先样式比其他祖先样式优先级高</p>
+<p>“直接样式”比”祖先样式”优先级高</p>
+<h3 id="link-与-import-的区别"><a href="#link-与-import-的区别" class="headerlink" title="link 与 @import 的区别"></a>link 与 @import 的区别</h3><p>link 是 HTML 方式， @import 是 CSS 方式</p>
+<p>link 最大限度支持并行下载，@import 过多嵌套导致串行下载，出现FOUC</p>
+<p>link 可以通过 rel=”alternate stylesheet”指定候选样式</p>
+<p>浏览器对 link 支持早于 @import，可以使用 @import 对老浏览器隐藏样式</p>
+<p>@import 必须在样式规则之前，可以在 css 文件中引用其他文件</p>
+<p>总体来说：link 优于 @import</p>
+<h3 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-css-CSS%E6%A1%86%E6%A8%A1%E5%9E%8B.jpg" alt="CSS框模型"></p>
+<p>具备属性：内容(content)、填充(padding)、边框(border)、边界(margin)</p>
+<p>拓展阅读<a href="./04.CSS%E7%9B%92%E6%A8%A1%E5%9E%8B.md">《CSS盒模型》</a></p>
+<h3 id="容器包含若干浮动元素时如何清理-包含-浮动"><a href="#容器包含若干浮动元素时如何清理-包含-浮动" class="headerlink" title="容器包含若干浮动元素时如何清理(包含)浮动"></a>容器包含若干浮动元素时如何清理(包含)浮动</h3><p>容器元素闭合标签前添加额外元素并设置clear: both</p>
+<p>父元素触发块级格式化上下文(见块级可视化上下文部分)</p>
+<p>设置容器元素伪元素进行清理推荐的清理浮动方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 在标准浏览器下使用</span><br><span class="line">* 1 content内容为空格用于修复opera下文档中出现</span><br><span class="line">*   contenteditable属性时在清理浮动元素上下的空白</span><br><span class="line">* 2 使用display使用table而不是block：可以防止容器和</span><br><span class="line">*   子元素top-margin折叠,这样能使清理效果与BFC，IE6/7</span><br><span class="line">*   zoom: 1;一致</span><br><span class="line">**/</span><br><span class="line">.clearfix:before,</span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    content: &quot; &quot;; /* 1 */</span><br><span class="line">    display: table; /* 2 */</span><br><span class="line">&#125;</span><br><span class="line">.clearfix:after &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="如何水平居中一个元素"><a href="#如何水平居中一个元素" class="headerlink" title="如何水平居中一个元素"></a>如何水平居中一个元素</h3><p>被设置元素为文本、图片等行内元素时，水平居中是通过给父元素设置 text-align:center 来实现的</p>
+<p>定宽和块状可以通过设置 “左右margin” 值为 “auto” 实现居中</p>
+<p>不定宽块状使用 float:left 实现居中</p>
+<p>拓展阅读<a href="./05.CSS%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD%E8%AE%BE%E7%BD%AE.md">《CSS 水平居中设置》</a></p>
+<h3 id="如何竖直居中一个元素"><a href="#如何竖直居中一个元素" class="headerlink" title="如何竖直居中一个元素"></a>如何竖直居中一个元素</h3><p>父元素高度确定的单行文本</p>
+<p>父元素高度确定的多行文本</p>
+<p>拓展阅读<a href="./06.CSS%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E8%AE%BE%E7%BD%AE.md">《CSS 垂直居中设置》</a></p>
+<h3 id="flex-与-CSS-盒子模型有什么区别"><a href="#flex-与-CSS-盒子模型有什么区别" class="headerlink" title="flex 与 CSS 盒子模型有什么区别"></a>flex 与 CSS 盒子模型有什么区别</h3><p>布局的传统解决方案，基于盒状模型，依赖 display 属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，垂直居中就不容易实现</p>
+<p>Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能</p>
+<p>拓展阅读 <a href="./07.flex%E5%B8%83%E5%B1%80%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.md">《flex 布局的基本概念》</a></p>
+<h3 id="Position-属性"><a href="#Position-属性" class="headerlink" title="Position 属性"></a>Position 属性</h3><table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>absolute</td>
+<td>生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 “left”, “top”, “right” 以及 “bottom” 属性进行规定</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>生成相对定位的元素，相对于其正常位置进行定位。因此，”left:20” 会向元素的 LEFT 位置添加 20 像素</td>
+</tr>
+<tr>
+<td>static</td>
+<td>默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）</td>
+</tr>
+<tr>
+<td>inherit</td>
+<td>规定应该从父元素继承 position 属性的值</td>
+</tr>
+</tbody></table>
+<p>拓展阅读 <a href="./08.CSS-Position%E5%AD%A6%E4%B9%A0.md">《CSS Position学习》</a></p>
+<h3 id="PNG-GIF-JPG-的区别及如何选"><a href="#PNG-GIF-JPG-的区别及如何选" class="headerlink" title="PNG,GIF,JPG 的区别及如何选"></a>PNG,GIF,JPG 的区别及如何选</h3><ul>
+<li>GIF</li>
+</ul>
+<p>8位像素，256色；无损压缩；支持简单动画；支持boolean透明；适合简单动画</p>
+<ul>
+<li>JPEG</li>
+</ul>
+<p>颜色限于256；有损压缩；可控制压缩质量；不支持透明；适合照片</p>
+<ul>
+<li>PNG</li>
+</ul>
+<p>有PNG8和truecolor PNG；PNG8类似GIF颜色上限为256，文件小，支持alpha透明度，无动画；适合图标、背景、按钮</p>
+<h3 id="为什么把-JavaScript-文件放在-Html-底部"><a href="#为什么把-JavaScript-文件放在-Html-底部" class="headerlink" title="为什么把 JavaScript 文件放在 Html 底部"></a>为什么把 JavaScript 文件放在 Html 底部</h3><p>脚本会阻塞页面其他资源的下载，因此推荐将所有<code>&lt;script&gt;</code>标签尽可能放到<code>&lt;body&gt;</code>标签的底部，以尽量减少对整个页面下载的影响</p>
+<p>拓展阅读 <a href="./09.JavaScript%E7%9A%84%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E5%8A%A0%E8%BD%BD%E5%92%8C%E6%89%A7%E8%A1%8C.md">《JavaScript 的性能优化：加载和执行》</a></p>
+<h3 id="JavaScript-数据类型"><a href="#JavaScript-数据类型" class="headerlink" title="JavaScript 数据类型"></a>JavaScript 数据类型</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//web-javascript-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B.png" alt="JavaScript 数据类型"></p>
+<p>拓展阅读 <a href="./10.JavaScript%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md">《JavaScript 数据类型和数据结构》</a></p>
+<h3 id="JavaScript-操作-DOM-的方法有哪些"><a href="#JavaScript-操作-DOM-的方法有哪些" class="headerlink" title="JavaScript 操作 DOM 的方法有哪些"></a>JavaScript 操作 DOM 的方法有哪些</h3><p>获取节点的方法getElementById、getElementsByClassName、getElementsByTagName、 getElementsByName、querySelector、querySelectorAll,对元素属性进行操作的 getAttribute、 setAttribute、removeAttribute方法，对节点进行增删改的appendChild、insertBefore、replaceChild、removeChild、 createElement等</p>
+<p>拓展阅读 <a href="./11.JavaScript%E6%93%8D%E4%BD%9CDOM%E5%B8%B8%E7%94%A8%E7%9A%84API.md">《JavaScript操作DOM常用的API》</a></p>
+<h3 id="JavaScript-字符串方法有哪些"><a href="#JavaScript-字符串方法有哪些" class="headerlink" title="JavaScript 字符串方法有哪些"></a>JavaScript 字符串方法有哪些</h3><p>简单分为获取类方法，获取类方法有charAt方法用来获取指定位置的字符，获取指定位置字符的unicode编码的charCodeAt方法， 与之相反的fromCharCode方法，通过传入的unicode返回字符串。查找类方法有indexof()、lastIndexOf()、search()、match() 方法。截取类的方法有substring、slice、substr三个方法，其他的还有replace、split、toLowerCase、toUpperCase方法</p>
+<h3 id="JavaScript-字符串截取方法有哪些？有什么区别"><a href="#JavaScript-字符串截取方法有哪些？有什么区别" class="headerlink" title="JavaScript 字符串截取方法有哪些？有什么区别"></a>JavaScript 字符串截取方法有哪些？有什么区别</h3><p>js字符串截取方法有substring、slice、substr三个方法，substring和slice都是指定截取的首尾索引值，不同的是传递负值的时候 substring会当做0来处理，而slice传入负值的规则是-1指最后一个字符，substr方法则是第一个参数是开始截取的字符串，第二个是截取的字符数量， 和slice类似，传入负值也是从尾部算起的</p>
+<h3 id="setTimeout-和-setInterval-的区别"><a href="#setTimeout-和-setInterval-的区别" class="headerlink" title="setTimeout 和 setInterval 的区别"></a>setTimeout 和 setInterval 的区别</h3><p>setTimeout表示间隔一段时间之后执行一次调用，而setInterval则是每间隔一段时间循环调用，直至clearInterval结束。 内存方面，setTimeout只需要进入一次队列，不会造成内存溢出，setInterval因为不计算代码执行时间，有可能同时执行多次代码， 导致内存溢出</p>
+<h3 id="使用-new-操作符实例化一个对象的具体步骤"><a href="#使用-new-操作符实例化一个对象的具体步骤" class="headerlink" title="使用 new 操作符实例化一个对象的具体步骤"></a>使用 new 操作符实例化一个对象的具体步骤</h3><ul>
+<li><p>构造一个新的对象</p>
+</li>
+<li><p>将构造函数的作用域赋给新对象（也就是说this指向了新的对象）</p>
+</li>
+<li><p>执行构造函数中的代码</p>
+</li>
+<li><p>返回新对象</p>
+</li>
+</ul>
+<h3 id="如何实现-ajax-请求"><a href="#如何实现-ajax-请求" class="headerlink" title="如何实现 ajax 请求"></a>如何实现 ajax 请求</h3><p>通过实例化一个XMLHttpRequest对象得到一个实例，调用实例的open方法为这次 ajax请求设定相应的http方法、相应的地址和以及是否异步，当然大多数情况下我们都是选异步， 以异步为例，之后调用send方法ajax请求，这个方法可以设定需要发送的报文主体，然后通过 监听readystatechange事件，通过这个实例的readyState属性来判断这个ajax请求的状态，其中分为0,1,2,3,4这四种 状态，当状态为4的时候也就是接收数据完成的时候，这时候可以通过实例的status属性判断这个请求是否成功</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&#x27;get&#x27;</span>, <span class="string">&#x27;aabb.php&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>(<span class="literal">null</span>);</span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span>(xhr.<span class="property">readyState</span>==<span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.<span class="property">status</span>==<span class="number">200</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="同源策略是什么"><a href="#同源策略是什么" class="headerlink" title="同源策略是什么"></a>同源策略是什么</h3><p>同源策略是指只有具有相同源的页面才能够共享数据，比如cookie，同源是指页面具有相同的协议、域名、端口号，有一项不同就不是同源。 有同源策略能够保证web网页的安全性</p>
+<p>拓展阅读 <a href="./12.%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5.md">《浏览器的同源策略》</a></p>
+<h3 id="如何解决跨域问题"><a href="#如何解决跨域问题" class="headerlink" title="如何解决跨域问题"></a>如何解决跨域问题</h3><ul>
+<li>通过 JSONP 跨域</li>
+<li>document.domain + iframe 跨域</li>
+<li>location.hash + iframe</li>
+<li>window.name + iframe 跨域</li>
+<li>postMessage 跨域</li>
+<li>跨域资源共享（CORS）</li>
+<li>nginx 代理跨域</li>
+<li>nodejs 中间件代理跨域</li>
+<li>WebSocket 协议跨域</li>
+</ul>
+<p>拓展阅读 <a href="./13.%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E8%B7%A8%E5%9F%9F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.md">《前端常见跨域解决方案》</a></p>
+<h3 id="引起内存泄漏的操作有哪些"><a href="#引起内存泄漏的操作有哪些" class="headerlink" title="引起内存泄漏的操作有哪些"></a>引起内存泄漏的操作有哪些</h3><ul>
+<li><p>全局变量引起</p>
+</li>
+<li><p>闭包引起</p>
+</li>
+<li><p>dom清空，事件未清除</p>
+</li>
+<li><p>子元素存在引用</p>
+</li>
+<li><p>被遗忘的计时器</p>
+</li>
+</ul>
+<h3 id="闭包理解及应用"><a href="#闭包理解及应用" class="headerlink" title="闭包理解及应用"></a>闭包理解及应用</h3><p>闭包是函数和声明该函数的词法环境的组合</p>
+<p>应用</p>
+<ul>
+<li><p>定义事件行为</p>
+</li>
+<li><p>模拟私有方法，用于定义公共函数</p>
+</li>
+</ul>
+<p>拓展阅读 <a href="./14.JavaScript%E9%97%AD%E5%8C%85.md">《JavaScript闭包》</a></p>
+<h3 id="对-JavaScript-原型的理解"><a href="#对-JavaScript-原型的理解" class="headerlink" title="对 JavaScript 原型的理解"></a>对 JavaScript 原型的理解</h3><p>我们知道在es6之前，js没有类和继承的概念，js是通过原型来实现继承的。在js中一个构造函数默认自带有一个prototype属性， 这个的属性值是一个对象，同时这个prototype对象自带有一个constructor属性，这个属性指向这个构造函数，同时每一个实例 都有一个__proto__属性指向这个prototype对象，我们可以将这个叫做隐式原型，我们在使用一个实例的方法的时候，会先检查 这个实例中是否有这个方法，没有则会继续向上查找这个prototype对象是否有这个方法，刚刚我们说到prototype是一个对象， 那么也即是说这个是一个对象的实例，那么这个对象同样也会有一个__proto__属性指向对象的prototype对象</p>
+<h3 id="对-JavaScript-模块化的理解"><a href="#对-JavaScript-模块化的理解" class="headerlink" title="对 JavaScript 模块化的理解"></a>对 JavaScript 模块化的理解</h3><p>在ES6出现之前，js没有标准的模块化概念，这也就造成了js多人写作开发容易造成全局污染的情况，以前我们可能会采用立即执行 函数、对象等方式来尽量减少变量这种情况，后面社区为了解决这个问题陆续提出了AMD规范和CMD规范，这里不同于Node.js的 CommonJS的原因在于服务端所有的模块都是存在于硬盘中的，加载和读取几乎是不需要时间的，而浏览器端因为加载速度取决于网速， 因此需要采用异步加载，AMD规范中使用define来定义一个模块，使用require方法来加载一个模块，现在ES6也推出了标准的模块 加载方案，通过export和import来导出和导入模块。</p>
+<h3 id="如何判断网页中图片加载成功或者失败"><a href="#如何判断网页中图片加载成功或者失败" class="headerlink" title="如何判断网页中图片加载成功或者失败"></a>如何判断网页中图片加载成功或者失败</h3><p>使用onload事件运行加载成功，使用onerror事件判断失败</p>
+<h3 id="如何实现懒加载"><a href="#如何实现懒加载" class="headerlink" title="如何实现懒加载"></a>如何实现懒加载</h3><p>懒加载就是根据用户的浏览需要记载内容，也就是在用户即将浏览完当前的内容时进行继续加载内容，这种技术常常用来加载图片的时候使用。我们判断用户是否即将浏览到底部之后进行在家内容 这时候可能会需要加载大量的内容，可以使用fragment来优化一下，因为大部分是使用滑动和滚轮来触发的，因此很有可能会不断触发，可以使用函数节流做一个优化，防止用户不断触发</p>
+<h3 id="JSONP-原理"><a href="#JSONP-原理" class="headerlink" title="JSONP 原理"></a>JSONP 原理</h3><p>创建一个回调函数，然后在远程服务上调用这个函数并且将 JSON 数据形式作为参数传递，完成回调</p>
+<p>拓展阅读 <a href="./15.jsonp%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0.md">《jsonp的原理与简单实现》</a></p>
+<h3 id="Cookie-读写"><a href="#Cookie-读写" class="headerlink" title="Cookie 读写"></a>Cookie 读写</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span> = <span class="string">&quot;name=oeschger&quot;</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span> = <span class="string">&quot;favorite_food=tripe&quot;</span>;</span><br><span class="line"><span class="title function_">alert</span>(<span class="variable language_">document</span>.<span class="property">cookie</span>);</span><br><span class="line"><span class="comment">// 显示: name=oeschger;favorite_food=tripe</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span> = <span class="string">&quot;test1=Hello&quot;</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span> = <span class="string">&quot;test2=World&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> myCookie = <span class="variable language_">document</span>.<span class="property">cookie</span>.<span class="title function_">replace</span>(<span class="regexp">/(?:(?:^|.*;\s*)test2\s*\=\s*([^;]*).*$)|^.*$/</span>, <span class="string">&quot;$1&quot;</span>);</span><br><span class="line"><span class="title function_">alert</span>(myCookie);</span><br><span class="line"><span class="comment">// 显示: World</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="渐进增强"><a href="#渐进增强" class="headerlink" title="渐进增强"></a>渐进增强</h3><p>渐进增强(英语：Progressive enhancement)是网页设计的一种策略，强调可访问性，语义 HTML 标记，外部样式表和脚本技术。渐进增强使用 Web 技术以分层的方式，允许所有人访问网页的基本内容和功能，使用任何浏览器或互联网连接，同时还给更先进的浏览器软件或更大的带宽提供了这些页面的一个增强版本</p>
+<p>核心原则</p>
+<ul>
+<li><p>基本内容应该是被所有网络浏览器访问</p>
+</li>
+<li><p>基本功能应该是被所有网络浏览器访问</p>
+</li>
+<li><p>稀疏的，语义化的标记包含的所有内容</p>
+</li>
+<li><p>增强的布局是由外部链接的 CSS 提供</p>
+</li>
+<li><p>增强的行为是由外部链接的非侵入式 JavaScript 提供</p>
+</li>
+<li><p>最终用户的网络浏览器偏好被受到尊重</p>
+</li>
+</ul>
+<h3 id="从浏览器地址栏输入-URL-到显示页面的步骤"><a href="#从浏览器地址栏输入-URL-到显示页面的步骤" class="headerlink" title="从浏览器地址栏输入 URL 到显示页面的步骤"></a>从浏览器地址栏输入 URL 到显示页面的步骤</h3><h3 id="Vue-js-双向绑定原理"><a href="#Vue-js-双向绑定原理" class="headerlink" title="Vue.js 双向绑定原理"></a>Vue.js 双向绑定原理</h3><p>拓展阅读 <a href="./16.vue%E7%9A%84%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0.md">《vue的双向绑定原理及实现》</a></p>
+<h3 id="如何进行网站性能优化"><a href="#如何进行网站性能优化" class="headerlink" title="如何进行网站性能优化"></a>如何进行网站性能优化</h3><h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>浏览器单域名并发数限制、静态资源缓存 304 （If-Modified-Since 以及 Etag 原理）、多个小图标合并使用 position 定位技术 减少请求、静态资源合为单次请求 并压缩、CDN、静态资源延迟加载技术、预加载技术、keep-alive、CSS 在头部，JS 在尾部的优化（原理）</p>
+<h3 id="新技术（了解）"><a href="#新技术（了解）" class="headerlink" title="新技术（了解）"></a>新技术（了解）</h3><p>ES6、模块化、打包、构建工具、vue、react、webpack、前端 MVVM</p>
+<h3 id="简要介绍-ES6"><a href="#简要介绍-ES6" class="headerlink" title="简要介绍 ES6"></a>简要介绍 ES6</h3>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E7%AE%80%E7%AD%94"><span class="toc-number">1.</span> <span class="toc-text">问题与简答</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-%E7%AF%87"><span class="toc-number">1.1.</span> <span class="toc-text">Web 篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SEO-%E6%9C%89%E5%93%AA%E4%BA%9B%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">SEO 有哪些需要注意的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#img-%E6%A0%87%E7%AD%BE%E7%9A%84-title-%E5%92%8C-alt-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.2.</span> <span class="toc-text">img 标签的 title 和 alt 有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.3.</span> <span class="toc-text">CSS 选择器的分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-sprite-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">CSS sprite 是什么，有什么优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none-%E4%B8%8E-visibility-hidden-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.5.</span> <span class="toc-text">display: none 与 visibility: hidden 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display-block-%E5%92%8C-display-inline-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.6.</span> <span class="toc-text">display: block 和 display: inline 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E6%96%87%E4%BB%B6%E3%80%81style-%E6%A0%87%E7%AD%BE%E3%80%81%E8%A1%8C%E5%86%85-style-%E5%B1%9E%E6%80%A7%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.1.7.</span> <span class="toc-text">CSS 文件、style 标签、行内 style 属性优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#link-%E4%B8%8E-import-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.8.</span> <span class="toc-text">link 与 @import 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.9.</span> <span class="toc-text">盒子模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%8C%85%E5%90%AB%E8%8B%A5%E5%B9%B2%E6%B5%AE%E5%8A%A8%E5%85%83%E7%B4%A0%E6%97%B6%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86-%E5%8C%85%E5%90%AB-%E6%B5%AE%E5%8A%A8"><span class="toc-number">1.1.10.</span> <span class="toc-text">容器包含若干浮动元素时如何清理(包含)浮动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%B0%B4%E5%B9%B3%E5%B1%85%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.11.</span> <span class="toc-text">如何水平居中一个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%AB%96%E7%9B%B4%E5%B1%85%E4%B8%AD%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.12.</span> <span class="toc-text">如何竖直居中一个元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-%E4%B8%8E-CSS-%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.13.</span> <span class="toc-text">flex 与 CSS 盒子模型有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Position-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.14.</span> <span class="toc-text">Position 属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PNG-GIF-JPG-%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E5%A6%82%E4%BD%95%E9%80%89"><span class="toc-number">1.1.15.</span> <span class="toc-text">PNG,GIF,JPG 的区别及如何选</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8A%8A-JavaScript-%E6%96%87%E4%BB%B6%E6%94%BE%E5%9C%A8-Html-%E5%BA%95%E9%83%A8"><span class="toc-number">1.1.16.</span> <span class="toc-text">为什么把 JavaScript 文件放在 Html 底部</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.17.</span> <span class="toc-text">JavaScript 数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E6%93%8D%E4%BD%9C-DOM-%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.18.</span> <span class="toc-text">JavaScript 操作 DOM 的方法有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.19.</span> <span class="toc-text">JavaScript 字符串方法有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%96%B9%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.20.</span> <span class="toc-text">JavaScript 字符串截取方法有哪些？有什么区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout-%E5%92%8C-setInterval-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.21.</span> <span class="toc-text">setTimeout 和 setInterval 的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-new-%E6%93%8D%E4%BD%9C%E7%AC%A6%E5%AE%9E%E4%BE%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.22.</span> <span class="toc-text">使用 new 操作符实例化一个对象的具体步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-ajax-%E8%AF%B7%E6%B1%82"><span class="toc-number">1.1.23.</span> <span class="toc-text">如何实现 ajax 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.24.</span> <span class="toc-text">同源策略是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.25.</span> <span class="toc-text">如何解决跨域问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%B5%B7%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E6%93%8D%E4%BD%9C%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.26.</span> <span class="toc-text">引起内存泄漏的操作有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%90%86%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.27.</span> <span class="toc-text">闭包理解及应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-JavaScript-%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.28.</span> <span class="toc-text">对 JavaScript 原型的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9-JavaScript-%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.1.29.</span> <span class="toc-text">对 JavaScript 模块化的理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E7%BD%91%E9%A1%B5%E4%B8%AD%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E6%88%90%E5%8A%9F%E6%88%96%E8%80%85%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.1.30.</span> <span class="toc-text">如何判断网页中图片加载成功或者失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.1.31.</span> <span class="toc-text">如何实现懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.32.</span> <span class="toc-text">JSONP 原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-%E8%AF%BB%E5%86%99"><span class="toc-number">1.1.33.</span> <span class="toc-text">Cookie 读写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%90%E8%BF%9B%E5%A2%9E%E5%BC%BA"><span class="toc-number">1.1.34.</span> <span class="toc-text">渐进增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5-URL-%E5%88%B0%E6%98%BE%E7%A4%BA%E9%A1%B5%E9%9D%A2%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.35.</span> <span class="toc-text">从浏览器地址栏输入 URL 到显示页面的步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue-js-%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86"><span class="toc-number">1.1.36.</span> <span class="toc-text">Vue.js 双向绑定原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%AB%99%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.37.</span> <span class="toc-text">如何进行网站性能优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-number">1.1.38.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E6%8A%80%E6%9C%AF%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">1.1.39.</span> <span class="toc-text">新技术（了解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E4%BB%8B%E7%BB%8D-ES6"><span class="toc-number">1.1.40.</span> <span class="toc-text">简要介绍 ES6</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/04.Web/QA/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&text=WEB QA"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&is_video=false&description=WEB QA"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WEB QA&body=Check out this article: https://tlcydev.github.io/interview/docs/04.Web/QA/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&title=WEB QA"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/04.Web/QA/&name=WEB QA&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/04.Web/QA/&t=WEB QA"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    快乐的杨蛆
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

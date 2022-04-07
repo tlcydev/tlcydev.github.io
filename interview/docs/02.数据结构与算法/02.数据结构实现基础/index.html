@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="数据结构实现基础引子数据统计例子：在日常数据处理中，经常碰到需要对一组数据进行基本的统计分析，包含这些操作：平均数、最大值、最小值、中位数、标准差、方差等。这类统计可能发生在各种情况，比如学生成绩统计、家庭开支情况、GDP 统计等等，都会涉及到这类数据统计。 为每个具体应用都编写一个程序不会是一个好方法，程序都具有很大的相似性。数据结构的处理方法是从这些具体应用中抽象出共性的数据组织与操作方法，进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构实现基础">
+<meta property="og:url" content="https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="快乐的杨蛆">
+<meta property="og:description" content="数据结构实现基础引子数据统计例子：在日常数据处理中，经常碰到需要对一组数据进行基本的统计分析，包含这些操作：平均数、最大值、最小值、中位数、标准差、方差等。这类统计可能发生在各种情况，比如学生成绩统计、家庭开支情况、GDP 统计等等，都会涉及到这类数据统计。 为每个具体应用都编写一个程序不会是一个好方法，程序都具有很大的相似性。数据结构的处理方法是从这些具体应用中抽象出共性的数据组织与操作方法，进">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-single-link.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-double-link.png">
+<meta property="og:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-double-link2.png">
+<meta property="article:published_time" content="2019-06-17T06:00:10.000Z">
+<meta property="article:modified_time" content="2022-04-07T09:39:43.826Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-single-link.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>数据结构实现基础</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/01.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/03.%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&text=数据结构实现基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&is_video=false&description=数据结构实现基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构实现基础&body=Check out this article: https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&name=数据结构实现基础&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&t=数据结构实现基础"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">数据结构实现基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">引子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.1.1.</span> <span class="toc-text">数据统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">操作实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">数据结构存储基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88"><span class="toc-number">1.2.2.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.2.3.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">单向链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">单向链表的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">单向链表的常见操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.6.</span> <span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">双向循环链表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">流程控制基础</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        数据结构实现基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-17T06:00:10.000Z" itemprop="datePublished">2019-06-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="数据结构实现基础"><a href="#数据结构实现基础" class="headerlink" title="数据结构实现基础"></a>数据结构实现基础</h1><h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><h3 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h3><p>例子：在日常数据处理中，经常碰到需要对一组数据进行基本的统计分析，包含这些操作：平均数、最大值、最小值、中位数、标准差、方差等。这类统计可能发生在各种情况，比如学生成绩统计、家庭开支情况、GDP 统计等等，都会涉及到这类数据统计。</p>
+<p>为每个具体应用都编写一个程序不会是一个好方法，程序都具有很大的相似性。数据结构的处理方法是从这些具体应用中<code>抽象出共性的数据组织与操作方法</code>，进而采用某种具体的程序设计语言<code>实现相应的数据存储与操作</code></p>
+<p>数据抽象</p>
+<ul>
+<li>类型名称：统计数据集</li>
+<li>数据对象集：N 个元素 {x<sub>1</sub>, x<sub>2</sub>, … , x<sub>N</sub>} 的集合 S</li>
+<li>操作集：</li>
+</ul>
+<ol>
+<li>ElementType Average(S, N)：求 S 中 N 个元素的平均值</li>
+<li>ElementType Max(S, N)：求 S 中 N 个元素的最大值</li>
+<li>ElementType Min(S, N)：求 S 中 N 个元素的最小值</li>
+<li>ElementType Median(S, N)：求 S 中 N 个元素的中位数</li>
+</ol>
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>数据组织的基本存储方式主要是利用数组和链表方式来实现的，包括很复杂的数据结构，如图、树，也都不外乎应用数组和链表来实现</p>
+<ul>
+<li>若要实现的操作不是基本统计，而是集合运算，需要判断元素是否属于集合、对集合进行并和交运算、元素插入集合等。这些操作虽然在简单数组也可以实现，但是效率不高，使用树的组织方式可以更方便的实现集合的上述运算。</li>
+<li>若除了基本的统计操作外，还需要动态的维护一个集合，即经常往集合里加入/删除元素，那应该设计多大的数组来保存这些元素呢，太大浪费空间，太小不够用。使用链表来保存数据或许更适合，但是链表也有缺点，链表需要记录后续节点地址，跟数组存储相比，链表需要更多的存储空间，同时程序实现也比数组更加复杂。</li>
+</ul>
+<p>数据结构的存储实现跟所需要的操作密切相关，<code>没有最好的存储方式，只有最合适的存储方式</code>。</p>
+<h3 id="操作实现"><a href="#操作实现" class="headerlink" title="操作实现"></a>操作实现</h3><ul>
+<li><p>在确定数据的存储方式后，数据结构涉及的另一个问题是相关的操作如何实现。这些操作的实现需要利用程序设计语言提供的另一个功能，即<code>流程设计功能</code>。</p>
+</li>
+<li><p>在任何高级程序设计语言都提供了一种的基本流程控制语句，即分支控制语句和循环控制语句。分支控制结构、循环控制结构加上程序自然的语句顺序执行结构，是实现任何算法流程的基本结构。</p>
+</li>
+<li><p>在程序中，我们可以将程序的某个基本功能设计为函数，这一方面降低了程序设计的复杂性，另一方面也提高了程序设计的重用性。递归是数据结构算法设计的很重要的手段。</p>
+</li>
+</ul>
+<h2 id="数据结构存储基础"><a href="#数据结构存储基础" class="headerlink" title="数据结构存储基础"></a>数据结构存储基础</h2><p>变量是数据存储的基本单位，而变量是有类型的，例如：整型、浮点型、字符型、布尔型</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组是最基本的构造类型，它是一组相同类型数据的有序集合</p>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>指针变量用于存放变量的地址，通过指针就能间接访问那个变量</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>结构类型是一种允许把一些数据分量聚合成一个整体的数据类型，它能够把有内在联系的不同类型的数据统一成一个整体，使它们相互关联。同时，结构又是一个变量的集合，可以按照与成员类型变量相同的操作方法单独使用其变量成员。结构与数组的区别在于，数组的所有元素必须是相同类型的，而结构的成员可以是不同的数据类型。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct 结构名 &#123;</span><br><span class="line">	类型名 结构成员名 1;</span><br><span class="line">	类型名 结构成员名 2;</span><br><span class="line">	......</span><br><span class="line">	类型名 结构成员名 n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h3><p>链表使一种常见而重要的基础数据结构，也是实现复杂数据结构的重要手段。它不按照线性的顺序存储数据，而是由若干个同一结构类型的”结点”依次串联而成的，即每一个结点里保存着下一个结点的地址。使用链表结构可以克服数据需要预先知道数据大小的缺点，可以充分利用计算机内存空间，实现灵活的内存动态管理。但链表失去了数组方便随机存储的优点，同时链表由于增加了结点的指针域，空间开销比较大。</p>
+<h3 id="单向链表"><a href="#单向链表" class="headerlink" title="单向链表"></a>单向链表</h3><h4 id="单向链表的结构"><a href="#单向链表的结构" class="headerlink" title="单向链表的结构"></a>单向链表的结构</h4><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-single-link.png" alt="单向链表的组成示意图"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单向链表结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">node</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$next</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $p1 结点数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $p2 下一个结点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$p1</span>, <span class="variable">$p2</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;data = <span class="variable">$p1</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;next = <span class="variable">$p2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="单向链表的常见操作"><a href="#单向链表的常见操作" class="headerlink" title="单向链表的常见操作"></a>单向链表的常见操作</h4><ul>
+<li>链表的建立</li>
+</ul>
+<p>应用链表进行程序设计时，往往需要先建立一个链表，建立链表的过程实际上就是不断在链表中插入结点的过程</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">singleLinkList</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $n int 结点数目</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> $head obj 头结点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"><span class="variable">$n</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable">$head</span> = <span class="keyword">new</span> <span class="title function_ invoke__">node</span>(<span class="number">0</span>, <span class="literal">null</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="variable">$i</span>=<span class="variable">$n</span>; <span class="variable">$i</span> &gt; <span class="number">0</span>; <span class="variable">$i</span>--) &#123; </span><br><span class="line">			<span class="variable">$newNode</span> = <span class="keyword">new</span> <span class="title function_ invoke__">node</span>(<span class="variable">$i</span>, <span class="literal">null</span>);</span><br><span class="line">			<span class="variable">$newNode</span>-&gt;next = <span class="variable">$head</span>-&gt;next;</span><br><span class="line">			<span class="variable">$head</span>-&gt;next = <span class="variable">$newNode</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$head</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>插入结点</li>
+</ul>
+<p>在单向链表 head 的某个结点 p 之后插入一新结点：找到正确位置 p，申请新结点 t 并对 t 的结点信息赋值，最后将 t 插入在 p 之后</p>
+<ul>
+<li>删除结点</li>
+</ul>
+<p>从单向链表 head 中删除一个结点：找到被删除结点的前面一个结点 p，删除 p 之后的结点</p>
+<ul>
+<li>单向链表的遍历</li>
+</ul>
+<p>对单向链表最常见的处理方式：逐个查看链表中每个结点的数据并进行处理</p>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-double-link.png" alt="双向链表"></p>
+<p>在单向链表基础上增加指向前驱单元指针的链表叫做<code>双向链表</code>。结点增加指向其前驱结点的指针，将牺牲一部分空间代价，前驱单元查找可以不必从链头开始查找</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//双向链表结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">node</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$data</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$next</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$previous</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $p1 结点数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $p2 下一个结点</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> $p3 前一个结点</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$p1</span>, <span class="variable">$p2</span>, <span class="variable">$p3</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;data = <span class="variable">$p1</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;next = <span class="variable">$p2</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;previous = <span class="variable">$p3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="双向循环链表"><a href="#双向循环链表" class="headerlink" title="双向循环链表"></a>双向循环链表</h3><p><img src="http://tlcydev-github-io-1255676299.cos.ap-nanjing.myqcloud.com//DSA-double-link2.png" alt="双向循环链表"></p>
+<p>将双向链表最后一个单元的 Next 指针指向链表的第一个单元，而第一个单元的 Previous 指针指向链表的最后一个单元，这样构成的链表称为<code>双向循环链表</code></p>
+<h2 id="流程控制基础"><a href="#流程控制基础" class="headerlink" title="流程控制基础"></a>流程控制基础</h2><p>程序设计语言除了能表达各种各样的数据外，还必须提供一种手段来表达数据处理的过程，即<code>程序的控制过程</code>。程序的控制过程通过程序中的一系列语句来实现。</p>
+<p>按照结构化程序设计的观点，任何程序都可以将程序模块通过三种基本的控制结构进行组合来实现。这三种基本的控制结构是<code>顺序</code>、<code>分支</code>、<code>循环</code>。</p>
+<p><strong>《数据结构实现基础》 原文链接：<a target="_blank" rel="noopener" href="https://blog.maplemark.cn/2019/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80.html">https://blog.maplemark.cn/2019/07/数据结构实现基础.html</a></strong></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">数据结构实现基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">引子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1"><span class="toc-number">1.1.1.</span> <span class="toc-text">数据统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">数据存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">操作实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.</span> <span class="toc-text">数据结构存储基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E9%92%88"><span class="toc-number">1.2.2.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.2.3.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.4.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.5.</span> <span class="toc-text">单向链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">单向链表的结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">单向链表的常见操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.6.</span> <span class="toc-text">双向链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="toc-number">1.2.7.</span> <span class="toc-text">双向循环链表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">流程控制基础</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&text=数据结构实现基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&is_video=false&description=数据结构实现基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=数据结构实现基础&body=Check out this article: https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&title=数据结构实现基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&name=数据结构实现基础&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/02.%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%9F%BA%E7%A1%80/&t=数据结构实现基础"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    快乐的杨蛆
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

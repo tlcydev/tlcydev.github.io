@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="PHP 反射详解面向对象编程中对象被赋予了自省的能力，而这个自省的过程就是反射。反射，直观理解就是根据到达地找到出发地和来源。比如，一个光秃秃的对象，我们可以仅仅通过这个对象就能知道它所属的类、拥有哪些方法。反射是指在PHP运行状态中，扩展分析PHP程序，导出或提出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API。如何使用反射API 如何使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP 反射详解">
+<meta property="og:url" content="https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="快乐的杨蛆">
+<meta property="og:description" content="PHP 反射详解面向对象编程中对象被赋予了自省的能力，而这个自省的过程就是反射。反射，直观理解就是根据到达地找到出发地和来源。比如，一个光秃秃的对象，我们可以仅仅通过这个对象就能知道它所属的类、拥有哪些方法。反射是指在PHP运行状态中，扩展分析PHP程序，导出或提出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API。如何使用反射API 如何使用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-17T06:00:10.000Z">
+<meta property="article:modified_time" content="2022-04-07T09:42:03.896Z">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>PHP 反射详解</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/interview/docs/03.PHP/03.echo%E3%80%81print%E3%80%81print_r%E3%80%81var_dump%E5%8C%BA%E5%88%AB/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/interview/docs/04.Web/02.CSS%E9%80%89%E6%8B%A9%E5%99%A8%E7%9A%84%E5%88%86%E7%B1%BB/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&text=PHP 反射详解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&is_video=false&description=PHP 反射详解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP 反射详解&body=Check out this article: https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&name=PHP 反射详解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&t=PHP 反射详解"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP-%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">PHP 反射详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84-API"><span class="toc-number">1.1.</span> <span class="toc-text">如何使用反射 API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">反射有什么作用</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        PHP 反射详解
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name"></span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-17T06:00:10.000Z" itemprop="datePublished">2019-06-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="PHP-反射详解"><a href="#PHP-反射详解" class="headerlink" title="PHP 反射详解"></a>PHP 反射详解</h1><p>面向对象编程中对象被赋予了自省的能力，而这个自省的过程就是反射。<br>反射，直观理解就是根据到达地找到出发地和来源。比如，一个光秃秃的对象，我们可以仅仅通过这个对象就能知道它所属的类、拥有哪些方法。<br>反射是指在PHP运行状态中，扩展分析PHP程序，导出或提出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取信息以及动态调用对象方法的功能称为反射API。<br>如何使用反射API</p>
+<h2 id="如何使用反射-API"><a href="#如何使用反射-API" class="headerlink" title="如何使用反射 API"></a>如何使用反射 API</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$gender</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;name,<span class="string">&quot; \tis &quot;</span>,<span class="variable language_">$this</span>-&gt;gender,<span class="string">&quot;\r\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;Setting <span class="subst">$name</span> to <span class="subst">$value</span> \r\n&quot;</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="variable">$name</span>= <span class="variable">$value</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"><span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable language_">$this</span>-&gt;<span class="variable">$name</span>))&#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">&#x27;未设置&#x27;</span>;　</span><br><span class="line">			<span class="variable language_">$this</span>-&gt;<span class="variable">$name</span>=<span class="string">&quot;正在为你设置默认值&quot;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">  		<span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;<span class="variable">$name</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$student</span> = <span class="keyword">new</span> <span class="title function_ invoke__">person</span>();</span><br><span class="line"><span class="variable">$student</span>-&gt;name = <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line"><span class="variable">$student</span>-&gt;gender = <span class="string">&#x27;male&#x27;</span>;</span><br><span class="line"><span class="variable">$student</span>-&gt;age = <span class="number">24</span>;</span><br></pre></td></tr></table></figure>
+
+<p>现在，要获取这个student对象的方法和属性列表该怎么做呢？</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取对象属性列表</span></span><br><span class="line"><span class="variable">$reflect</span> = <span class="keyword">new</span> <span class="title class_">ReflectionObject</span>(<span class="variable">$student</span>);</span><br><span class="line"><span class="variable">$props</span>　= <span class="variable">$reflect</span>-&gt;<span class="title function_ invoke__">getProperties</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$props</span> <span class="keyword">as</span> <span class="variable">$prop</span>) &#123;</span><br><span class="line">	<span class="keyword">print</span> <span class="variable">$prop</span>-&gt;<span class="title function_ invoke__">getName</span>() .<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 获取对象方法列表</span></span><br><span class="line"><span class="variable">$m</span> = <span class="variable">$reflect</span>-&gt;<span class="title function_ invoke__">getMethods</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$m</span> <span class="keyword">as</span> <span class="variable">$prop</span>) &#123;</span><br><span class="line">	<span class="keyword">print</span> <span class="variable">$prop</span>-&gt;<span class="title function_ invoke__">getName</span>() .<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以不用反射API，使用class函数，返回对象属性的关联数组以及更多的信息：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回对象属性的关联数组</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">get_object_vars</span>(<span class="variable">$student</span>));</span><br><span class="line"><span class="comment">// 类属性</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">get_class_vars</span>(<span class="title function_ invoke__">get_class</span>(<span class="variable">$student</span>)));</span><br><span class="line"><span class="comment">// 返回由类的方法名组成的数组</span></span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">get_class_methods</span>(<span class="title function_ invoke__">get_class</span>(<span class="variable">$student</span>)));</span><br></pre></td></tr></table></figure>
+
+<p>假如这个对象是从其他页面传过来的，怎么知道它属于哪个类呢？</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取对象属性列表所属的类</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">get_class</span>(<span class="variable">$student</span>);</span><br></pre></td></tr></table></figure>
+
+<p>反射API的功能显然更强大，甚至能还原这个类的原型，包括方法的访问权限等</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反射获取类的原型</span></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="title class_">ReflectionClass</span>(<span class="string">&#x27;person&#x27;</span>);</span><br><span class="line"><span class="variable">$className</span> = <span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">getName</span>();</span><br><span class="line"><span class="variable">$Methods</span> = <span class="variable">$Properties</span> = <span class="keyword">array</span>();</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">getProperties</span>() <span class="keyword">as</span> <span class="variable">$v</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="variable">$Properties</span>[<span class="variable">$v</span>-&gt;<span class="title function_ invoke__">getName</span>()] = <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">getMethods</span>() <span class="keyword">as</span> <span class="variable">$v</span>)　　</span><br><span class="line">&#123;</span><br><span class="line">	<span class="variable">$Methods</span>[<span class="variable">$v</span>-&gt;<span class="title function_ invoke__">getName</span>()] = <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;class <span class="subst">&#123;$className&#125;</span>\n&#123;\n&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">is_array</span>(<span class="variable">$Properties</span>) &amp;&amp; <span class="title function_ invoke__">ksort</span>(<span class="variable">$Properties</span>);</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$Properties</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;\t&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$v</span>-&gt;<span class="title function_ invoke__">isPublic</span>() ? <span class="string">&#x27; public&#x27;</span> : <span class="string">&#x27;&#x27;</span>,<span class="variable">$v</span>-&gt;<span class="title function_ invoke__">isPrivate</span>() ? <span class="string">&#x27; private&#x27;</span> : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	<span class="variable">$v</span>-&gt;<span class="title function_ invoke__">isProtected</span>() ? <span class="string">&#x27; protected&#x27;</span> : <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	<span class="variable">$v</span>-&gt;<span class="title function_ invoke__">isStatic</span>() ? <span class="string">&#x27; static&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;\t<span class="subst">&#123;$k&#125;</span>\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_array</span>(<span class="variable">$Methods</span>)) <span class="title function_ invoke__">ksort</span>(<span class="variable">$Methods</span>);</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$Methods</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;\tfunction <span class="subst">&#123;$k&#125;</span>()&#123;&#125;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&#125;\n&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>输出如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">person</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> gender</span><br><span class="line">	<span class="keyword">public</span> name</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不仅如此，PHP手册中关于反射API更是有几十个，可以说，反射完整地描述了一个类或者对象的原型。反射不仅可以用于类和对象，还可以用于函数、扩展模块、异常等</p>
+<h2 id="反射有什么作用"><a href="#反射有什么作用" class="headerlink" title="反射有什么作用"></a>反射有什么作用</h2><p>反射可以用于文档生成。因此可以用它对文件里的类进行扫描，逐个生成描述文档。<br>既然反射可以探知类的内部结构，那么是不是可以用它做hook实现插件功能呢？或者是做动态代理呢？</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mysql</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params"><span class="variable">$db</span></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;连接到数据库$&#123;db[0]&#125;\r\n&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">sqlproxy</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="variable">$target</span>;  </span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">construct</span>(<span class="params"><span class="variable">$tar</span></span>) </span>&#123; </span><br><span class="line">		<span class="variable language_">$this</span>-&gt;target[] = <span class="keyword">new</span> <span class="variable">$tar</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">call</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$args</span></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">foreach</span> (<span class="variable language_">$this</span>-&gt;target <span class="keyword">as</span> <span class="variable">$obj</span>) &#123;</span><br><span class="line">			<span class="variable">$r</span> = <span class="keyword">new</span> <span class="title class_">ReflectionClass</span>(<span class="variable">$obj</span>);</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable">$method</span> = <span class="variable">$r</span>-&gt;<span class="title function_ invoke__">getMethod</span>(<span class="variable">$name</span>)) &#123;</span><br><span class="line">				<span class="keyword">if</span> (<span class="variable">$method</span>-&gt;<span class="title function_ invoke__">isPublic</span>() &amp;&amp; !<span class="variable">$method</span>-&gt;<span class="title function_ invoke__">isAbstract</span>()) &#123;</span><br><span class="line">					<span class="keyword">echo</span> <span class="string">&quot;方法前拦截记录LOG\r\n&quot;</span>;</span><br><span class="line">					<span class="variable">$method</span>-&gt;<span class="title function_ invoke__">invoke</span>(<span class="variable">$obj</span>, <span class="variable">$args</span>);</span><br><span class="line">					<span class="keyword">echo</span> <span class="string">&quot;方法后拦截\r\n&quot;</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="title function_ invoke__">sqlproxy</span>(<span class="string">&#x27;mysql&#x27;</span>);</span><br><span class="line"><span class="variable">$obj</span>-&gt;<span class="title function_ invoke__">connect</span>(<span class="string">&#x27;member&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在平常开发中，用到反射的地方不多：一个是对对象进行调试，另一个是获取类的信息。在MVC和插件开发中，使用反射很常见，但是反射的消耗也很大，在可以找到替代方案的情况下，就不要滥用。</p>
+<p>PHP有Token函数，可以通过这个机制实现一些反射功能。从简单灵活的角度讲，使用已经提供的反射API是可取的。</p>
+<p>很多时候，善用反射能保持代码的优雅和简洁，但反射也会破坏类的封装性，因为反射可以使本不应该暴露的方法或属性被强制暴露了出来，这既是优点也是缺点。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP-%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">PHP 反射详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E5%8F%8D%E5%B0%84-API"><span class="toc-number">1.1.</span> <span class="toc-text">如何使用反射 API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">反射有什么作用</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&text=PHP 反射详解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&is_video=false&description=PHP 反射详解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PHP 反射详解&body=Check out this article: https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&title=PHP 反射详解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&name=PHP 反射详解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tlcydev.github.io/interview/docs/03.PHP/02.PHP%E5%8F%8D%E5%B0%84%E8%AF%A6%E8%A7%A3/&t=PHP 反射详解"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    快乐的杨蛆
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
